@@ -24,8 +24,9 @@ def main():
     init_db()
     seed()
 
-    # 2. Open browser automatically after a short pause
-    url = "http://localhost:8000"
+    # Port selection (8050 avoids collisions and cached browser service workers from other projects on 8000)
+    port = int(os.environ.get("PORT", 8050))
+    url = f"http://localhost:{port}"
     print(f"\nStarting server on {url} ...")
     print("Press Ctrl+C to stop the server.\n")
 
@@ -39,7 +40,7 @@ def main():
             webbrowser.open(url)
         threading.Thread(target=open_browser, daemon=True).start()
 
-        uvicorn.run("backend.app.main:app", host="127.0.0.1", port=8000, reload=True)
+        uvicorn.run("backend.app.main:app", host="127.0.0.1", port=port, reload=True)
     except KeyboardInterrupt:
         print("\nJalCheck server stopped.")
 

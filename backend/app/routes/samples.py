@@ -19,7 +19,7 @@ class NewSampleRequest(BaseModel):
     ec: Optional[float] = 500.0
 
 @router.get("")
-def list_samples(area_id: Optional[int] = None, limit: int = 100):
+def list_samples(area_id: Optional[int] = None, limit: int = 250):
     conn = get_db_connection()
     if area_id:
         rows = conn.execute("""
