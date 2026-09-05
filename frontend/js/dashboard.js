@@ -20,12 +20,17 @@ const Dashboard = {
   },
 
   fallbackData: [
-    { area_name: "North Enclave", ward: "Ward 1", count: 28, min: 180, avg: 210, max: 245, is_elevated: false, obs: "Safe municipal tap water." },
-    { area_name: "Sector 4", ward: "Ward 2", count: 32, min: 220, avg: 265, max: 310, is_elevated: false, obs: "Good mineral balance." },
-    { area_name: "Riverbank", ward: "Ward 3", count: 22, min: 390, avg: 480, max: 560, is_elevated: false, obs: "River adjacent shallow well." },
-    { area_name: "Industrial", ward: "Ward 4", count: 24, min: 650, avg: 720, max: 810, is_elevated: true, obs: "Elevated minerals from deep borewell." },
-    { area_name: "Central", ward: "Ward 5", count: 26, min: 310, avg: 390, max: 470, is_elevated: false, obs: "Commercial mixed supply." },
-    { area_name: "Green Valley", ward: "Ward 6", count: 16, min: 140, avg: 175, max: 210, is_elevated: false, obs: "Pristine natural mountain spring." }
+    { area_name: "Shivaji Nagar", ward: "Ward 1", count: 10, min: 342, avg: 387.6, max: 433, is_elevated: false, obs: "Safe municipal & community tap water." },
+    { area_name: "Salwad", ward: "Ward 2", count: 10, min: 368, avg: 416.7, max: 463, is_elevated: false, obs: "Moderate calcium hardness." },
+    { area_name: "Katkar", ward: "Ward 3", count: 10, min: 394, avg: 449.6, max: 503, is_elevated: true, obs: "Peak TDS reaches 503 mg/L in municipal line." },
+    { area_name: "Mahavir Nagar", ward: "Ward 4", count: 10, min: 351, avg: 397.0, max: 451, is_elevated: false, obs: "Good drinking quality with clear turbidity." },
+    { area_name: "Bhandarwada", ward: "Ward 5", count: 10, min: 378, avg: 436.3, max: 498, is_elevated: false, obs: "Elevated turbidity during extraction." },
+    { area_name: "Betegaon", ward: "Ward 6", count: 10, min: 326, avg: 365.4, max: 418, is_elevated: false, obs: "Lowest TDS in the district (326-418 mg/L)." },
+    { area_name: "Awadh Nagar", ward: "Ward 7", count: 10, min: 338, avg: 398.0, max: 465, is_elevated: false, obs: "Good balanced mineral content." },
+    { area_name: "Pam", ward: "Ward 8", count: 10, min: 369, avg: 443.2, max: 523, is_elevated: true, obs: "Deep borewell reaches 523 mg/L with elevated EC." },
+    { area_name: "Ganesh Nagar", ward: "Ward 9", count: 10, min: 351, avg: 423.9, max: 508, is_elevated: true, obs: "Borewell peak 508 mg/L; clear taps." },
+    { area_name: "Yadav Nagar", ward: "Ward 10", count: 10, min: 342, avg: 412.3, max: 496, is_elevated: false, obs: "Consistently conforms with Indian Standards." },
+    { area_name: "Azad Nagar", ward: "Ward 11", count: 10, min: 337, avg: 412.3, max: 509, is_elevated: true, obs: "Borderline TDS in deep borewell." }
   ],
 
   async render() {
