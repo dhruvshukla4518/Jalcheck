@@ -1,6 +1,7 @@
 """
 JalCheck Dataset Export Route
 Provides one-click downloadable CSV dataset for academic and research use.
+Calibrated to accurate Boisar/Palghar coordinates including Pasthal (Ward 4).
 """
 import io
 import csv
@@ -27,7 +28,8 @@ def export_samples_csv():
         p.ph,
         p.turbidity,
         p.hardness,
-        p.ec
+        p.ec,
+        p.temperature
     FROM water_samples s
     JOIN areas a ON s.area_id = a.id
     JOIN water_parameters p ON s.id = p.sample_id
@@ -52,6 +54,7 @@ def export_samples_csv():
         "Turbidity (NTU)",
         "Hardness (mg/L)",
         "EC (µS/cm)",
+        "Temperature (°C)",
         "Latitude",
         "Longitude",
         "BIS IS 10500 Compliance"
@@ -84,6 +87,7 @@ def export_samples_csv():
             f"{r['turbidity']:.2f}",
             f"{r['hardness']:.1f}",
             f"{r['ec']:.1f}",
+            f"{r['temperature']:.1f}",
             lat,
             lon,
             status

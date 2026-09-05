@@ -51,7 +51,7 @@ const Dashboard = {
         "obs": "Tested across 10 certified sites. Average TDS is 446.3 mg/L (max 503.0), pH is 7.55, Turbidity is 2.23 NTU."
     },
     {
-        "area_name": "Mahavir Nagar",
+        "area_name": "Pasthal",
         "ward": "Ward 4",
         "count": 10,
         "min": 351.0,

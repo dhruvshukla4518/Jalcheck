@@ -38,6 +38,7 @@ class TestJalCheckPlatform(unittest.TestCase):
         area_names = [a["name"] for a in areas]
         self.assertIn("Shivaji Nagar", area_names)
         self.assertIn("Azad Nagar", area_names)
+        self.assertIn("Pasthal", area_names)
 
     def test_03_samples_endpoint(self):
         res = self.client.get("/api/samples")
