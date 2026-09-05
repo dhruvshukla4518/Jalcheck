@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JalCheck — Water Quality Analysis & Community Awareness Platform</title>
+  <!-- Allowlisted Tailwind CSS -->
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <!-- JalCheck Environmental Tech Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans selection:bg-cyan-500 selection:text-white flex flex-col antialiased">
+
+  <!-- TOP LIVE DATABASE STATS TICKER -->
+  <header class="border-b border-cyan-900/50 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div class="flex items-center space-x-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-cyan-950 text-cyan-400 border border-cyan-700/50">
+          <span class="w-2 h-2 mr-1.5 bg-emerald-400 rounded-full animate-ping"></span>
+          LIVE DATABASE
+        </span>
+        <span class="text-slate-400 hidden sm:inline">| Indian Drinking Water Standard: BIS IS 10500:2012</span>
+      </div>
+
+      <!-- Live Counters from SQLite Database -->
+      <div class="flex items-center space-x-4 sm:space-x-6 text-slate-300">
+        <div><span class="text-slate-500">Samples:</span> <strong class="text-cyan-400 font-semibold" id="top-stat-samples">148</strong></div>
+        <div><span class="text-slate-500">Wards:</span> <strong class="text-cyan-400 font-semibold" id="top-stat-areas">6</strong></div>
+        <div><span class="text-slate-500">Surveyed:</span> <strong class="text-cyan-400 font-semibold" id="top-stat-surveyed">394</strong></div>
+        <div><span class="text-slate-500">TDS Awareness:</span> <strong class="text-emerald-400 font-semibold" id="top-stat-awareness">66.8%</strong></div>
+      </div>
+
+      <!-- Quick Audio & Voice Control -->
+      <div class="flex items-center space-x-2">
+        <button id="tts-global-btn" onclick="ProfessorAqua.toggleVoice()" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition" title="Toggle Professor Aqua Voice Audio">
+          <svg id="audio-icon-on" class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M11 5L6 9H2v6h4l5 4V5z"/>
+          </svg>
+          <span id="voice-status-text" class="text-[11px] font-medium">Voice: ON</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN APP NAVBAR -->
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between border-t border-slate-800">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="App.switchTab('home')">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-600 to-blue-500 flex items-center justify-center shadow-lg shadow-cyan-500/20 text-white font-black text-lg">
+          ■
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl font-bold tracking-tight text-white">JAL<span class="text-cyan-400">CHECK</span></h1>
+            <span class="text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-cyan-900/60 text-cyan-300 font-semibold border border-cyan-800">Vanilla CEP</span>
+          </div>
+          <p class="text-[11px] text-slate-400 italic">Know Your Water. Understand Your Community.</p>
+        </div>
+      </div>
+
+      <!-- Desktop Tab Navigation Buttons -->
+      <div class="hidden lg:flex items-center space-x-1">
+        <button onclick="App.switchTab('home')" id="nav-btn-home" class="nav-btn px-3 py-1.5 rounded-lg text-xs font-medium text-cyan-400 bg-slate-800/80 border border-cyan-500/30">Home</button>
+        <button onclick="App.switchTab('map')" id="nav-btn-map" class="nav-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Area Map</button>
+        <button onclick="App.switchTab('dashboard')" id="nav-btn-dashboard" class="nav-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Analytics Dashboard</button>
+        <button onclick="App.switchTab('analyzer')" id="nav-btn-analyzer" class="nav-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800/50 flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Water Analyzer
+        </button>
+        <button onclick="App.switchTab('survey')" id="nav-btn-survey" class="nav-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Community Survey</button>
+        <button onclick="App.switchTab('guide')" id="nav-btn-guide" class="nav-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Water Guide</button>
+        <button onclick="App.switchTab('report')" id="nav-btn-report" class="nav-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">Reports</button>
+        <button onclick="App.switchTab('about')" id="nav-btn-about" class="nav-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800/50">About CEP</button>
+      </div>
+
+      <!-- Quick Action: Professor Aqua -->
+      <div class="flex items-center space-x-2">
+        <button onclick="ProfessorAqua.explain('greeting')" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-semibold text-xs shadow-md shadow-cyan-500/25 flex items-center gap-1.5 transition active:scale-95">
+          <span class="text-sm">👨‍🔬</span>
+          <span>Ask Prof. Aqua</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Scrollable Navigation Bar -->
+    <div class="lg:hidden flex items-center space-x-2 px-4 py-2 overflow-x-auto border-t border-slate-800/80 text-xs no-scrollbar">
+      <button onclick="App.switchTab('home')" class="whitespace-nowrap px-2.5 py-1 rounded bg-slate-800 text-cyan-400">Home</button>
+      <button onclick="App.switchTab('map')" class="whitespace-nowrap px-2.5 py-1 rounded text-slate-300">Map</button>
+      <button onclick="App.switchTab('dashboard')" class="whitespace-nowrap px-2.5 py-1 rounded text-slate-300">Dashboard</button>
+      <button onclick="App.switchTab('analyzer')" class="whitespace-nowrap px-2.5 py-1 rounded text-slate-300">Analyzer</button>
+      <button onclick="App.switchTab('survey')" class="whitespace-nowrap px-2.5 py-1 rounded text-slate-300">Survey</button>
+      <button onclick="App.switchTab('guide')" class="whitespace-nowrap px-2.5 py-1 rounded text-slate-300">Guide</button>
+      <button onclick="App.switchTab('report')" class="whitespace-nowrap px-2.5 py-1 rounded text-slate-300">Reports</button>
+    </div>
+  </header>
+
+  <!-- MAIN VIEWPORT -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 space-y-8">
+
+    <!-- ==================== TAB 1: HOME PAGE ==================== -->
+    <section id="tab-home" class="tab-pane space-y-8 block">
+      
+      <!-- HERO BANNER -->
+      <div class="relative overflow-hidden rounded-2xl water-gradient border border-cyan-800/50 p-6 sm:p-10 shadow-2xl">
+        <div class="absolute -right-10 -bottom-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-3xl relative z-10 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-900/40 border border-cyan-500/30 text-cyan-300 text-xs font-semibold">
+            <span>💧 Community Engagement Project (CEP)</span>
+            <span class="text-cyan-500">•</span>
+            <span>Civic Environmental Science</span>
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+            UNDERSTAND <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-400">YOUR WATER.</span>
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Clean drinking water is fundamental to community health. JalCheck empowers citizens, evaluators, and public health officials with verified laboratory water measurements across our study areas, real-time diagnostic testing, and an interactive virtual educator, <strong>Professor Aqua</strong>, to translate complex chemistry into clear health knowledge.
+          </p>
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <button onclick="App.switchTab('dashboard')" class="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/30 transition transform hover:-translate-y-0.5">
+              Explore Area Analytics →
+            </button>
+            <button onclick="App.switchTab('analyzer')" class="px-5 py-2.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-white font-medium text-sm border border-slate-700 transition">
+              Test Sample with Water Analyzer
+            </button>
+            <button onclick="ProfessorAqua.explain('home_hero')" class="px-4 py-2.5 rounded-xl bg-cyan-950/60 hover:bg-cyan-900/60 text-cyan-300 text-sm border border-cyan-700/50 flex items-center gap-2 transition">
+              <span>🎙️</span> Explain This Page
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIVE METRICS GRID -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div onclick="ProfessorAqua.explain('stat_samples')" class="card-glass p-4 rounded-xl cursor-pointer hover:border-cyan-500/50 transition group">
+          <div class="flex justify-between items-start">
+            <span class="text-xs text-slate-400 uppercase tracking-wider font-medium">Total Water Samples</span>
+            <span class="text-cyan-400 group-hover:scale-110 transition">🧪</span>
+          </div>
+          <div class="mt-2 text-2xl sm:text-3xl font-black text-white" id="home-total-samples">148</div>
+          <div class="mt-1 flex items-center text-xs text-emerald-400">
+            <span>↑ 100% verified lab data</span>
+          </div>
+          <span class="text-[10px] text-slate-500 mt-2 block group-hover:text-cyan-400">Tap to hear Prof. Aqua ↗</span>
+        </div>
+
+        <div onclick="ProfessorAqua.explain('stat_areas')" class="card-glass p-4 rounded-xl cursor-pointer hover:border-cyan-500/50 transition group">
+          <div class="flex justify-between items-start">
+            <span class="text-xs text-slate-400 uppercase tracking-wider font-medium">Study Zones Tested</span>
+            <span class="text-cyan-400 group-hover:scale-110 transition">🗺️</span>
+          </div>
+          <div class="mt-2 text-2xl sm:text-3xl font-black text-white">6 Wards</div>
+          <div class="mt-1 flex items-center text-xs text-cyan-300">
+            <span>Municipal & Borewell sites</span>
+          </div>
+          <span class="text-[10px] text-slate-500 mt-2 block group-hover:text-cyan-400">Tap to hear Prof. Aqua ↗</span>
+        </div>
+
+        <div onclick="ProfessorAqua.explain('stat_survey')" class="card-glass p-4 rounded-xl cursor-pointer hover:border-cyan-500/50 transition group">
+          <div class="flex justify-between items-start">
+            <span class="text-xs text-slate-400 uppercase tracking-wider font-medium">Residents Surveyed</span>
+            <span class="text-cyan-400 group-hover:scale-110 transition">👥</span>
+          </div>
+          <div class="mt-2 text-2xl sm:text-3xl font-black text-white" id="home-survey-count">394</div>
+          <div class="mt-1 flex items-center text-xs text-sky-400">
+            <span>Household water usage audit</span>
+          </div>
+          <span class="text-[10px] text-slate-500 mt-2 block group-hover:text-cyan-400">Tap to hear Prof. Aqua ↗</span>
+        </div>
+
+        <div onclick="ProfessorAqua.explain('stat_awareness')" class="card-glass p-4 rounded-xl cursor-pointer hover:border-cyan-500/50 transition group">
+          <div class="flex justify-between items-start">
+            <span class="text-xs text-slate-400 uppercase tracking-wider font-medium">Overall WQI Index</span>
+            <span class="text-cyan-400 group-hover:scale-110 transition">📈</span>
+          </div>
+          <div class="mt-2 text-2xl sm:text-3xl font-black text-emerald-400">76.4 <span class="text-sm font-normal text-slate-400">/ 100</span></div>
+          <div class="mt-1 flex items-center text-xs text-emerald-300">
+            <span>Grade B: Good Quality Overall</span>
+          </div>
+          <span class="text-[10px] text-slate-500 mt-2 block group-hover:text-cyan-400">Tap to hear Prof. Aqua ↗</span>
+        </div>
+      </div>
+
+      <!-- WORKFLOW STRIP -->
+      <div class="card-glass rounded-2xl p-6 border border-slate-800">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-6">
+          <div>
+            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+              <span>🎯</span> The JalCheck Workflow
+            </h3>
+            <p class="text-xs text-slate-400">How community residents & project evaluators interact with the system</p>
+          </div>
+          <span class="text-xs px-2.5 py-1 bg-cyan-950 text-cyan-300 border border-cyan-800 rounded-full font-mono">
+            Universal "Explain This" Active
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div onclick="App.switchTab('map')" class="bg-slate-900/90 p-4 rounded-xl border border-slate-800 hover:border-cyan-500/40 transition cursor-pointer">
+            <div class="w-8 h-8 rounded-lg bg-cyan-900/50 text-cyan-400 flex items-center justify-center font-bold text-sm mb-3">1</div>
+            <h4 class="text-sm font-semibold text-white">Select an Area</h4>
+            <p class="text-xs text-slate-400 mt-1">Pick a sampling ward, riverbank, or residential colony on the map.</p>
+          </div>
+          <div onclick="App.switchTab('dashboard')" class="bg-slate-900/90 p-4 rounded-xl border border-slate-800 hover:border-cyan-500/40 transition cursor-pointer">
+            <div class="w-8 h-8 rounded-lg bg-sky-900/50 text-sky-400 flex items-center justify-center font-bold text-sm mb-3">2</div>
+            <h4 class="text-sm font-semibold text-white">Explore Real Data</h4>
+            <p class="text-xs text-slate-400 mt-1">Compare actual TDS, pH, Hardness, and Turbidity with min/avg/max bars.</p>
+          </div>
+          <div onclick="App.switchTab('dashboard')" class="bg-slate-900/90 p-4 rounded-xl border border-slate-800 hover:border-cyan-500/40 transition cursor-pointer">
+            <div class="w-8 h-8 rounded-lg bg-indigo-900/50 text-indigo-400 flex items-center justify-center font-bold text-sm mb-3">3</div>
+            <h4 class="text-sm font-semibold text-white">Tap Any Visualization</h4>
+            <p class="text-xs text-slate-400 mt-1">Click any bar or metric to unlock instant observations without alarmism.</p>
+          </div>
+          <div onclick="ProfessorAqua.explain('greeting')" class="bg-slate-900/90 p-4 rounded-xl border border-slate-800 hover:border-cyan-500/40 transition cursor-pointer">
+            <div class="w-8 h-8 rounded-lg bg-emerald-900/50 text-emerald-400 flex items-center justify-center font-bold text-sm mb-3">4</div>
+            <h4 class="text-sm font-semibold text-white">Learn with Prof. Aqua</h4>
+            <p class="text-xs text-slate-400 mt-1">Listen to voice explanations and understand public health recommendations.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- KEY PARAMETERS HIGHLIGHT -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="card-glass p-5 rounded-xl border border-slate-800">
+          <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+            <span>Key Parameter</span>
+            <span class="px-2 py-0.5 rounded bg-blue-900/40 text-blue-300">TDS</span>
+          </div>
+          <h4 class="font-bold text-white text-base">Total Dissolved Solids</h4>
+          <p class="text-xs text-slate-300 mt-1">BIS Acceptable Limit: <strong class="text-cyan-400">500 mg/L</strong> (Permissible: 2000 mg/L). High TDS affects taste and hardness; not automatically toxic.</p>
+          <button onclick="ProfessorAqua.explain('tds_intro')" class="mt-3 text-xs text-cyan-400 hover:text-cyan-300 font-medium flex items-center gap-1">
+            Explain with Professor Aqua ↗
+          </button>
+        </div>
+
+        <div class="card-glass p-5 rounded-xl border border-slate-800">
+          <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+            <span>Key Parameter</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-900/40 text-emerald-300">pH</span>
+          </div>
+          <h4 class="font-bold text-white text-base">Acidity / Alkalinity</h4>
+          <p class="text-xs text-slate-300 mt-1">BIS Desirable Range: <strong class="text-emerald-400">6.5 to 8.5</strong>. Low pH corrodes metal pipes; high pH creates scale and reduces disinfection efficiency.</p>
+          <button onclick="ProfessorAqua.explain('ph_intro')" class="mt-3 text-xs text-cyan-400 hover:text-cyan-300 font-medium flex items-center gap-1">
+            Explain with Professor Aqua ↗
+          </button>
+        </div>
+
+        <div class="card-glass p-5 rounded-xl border border-slate-800">
+          <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+            <span>Key Parameter</span>
+            <span class="px-2 py-0.5 rounded bg-amber-900/40 text-amber-300">Turbidity</span>
+          </div>
+          <h4 class="font-bold text-white text-base">Water Clarity (NTU)</h4>
+          <p class="text-xs text-slate-300 mt-1">BIS Standard: <strong class="text-amber-400">&lt; 1 NTU</strong> (Permissible: 5 NTU). Cloudiness shelters microbes from chlorine disinfection.</p>
+          <button onclick="ProfessorAqua.explain('turbidity_intro')" class="mt-3 text-xs text-cyan-400 hover:text-cyan-300 font-medium flex items-center gap-1">
+            Explain with Professor Aqua ↗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: AREA MAP ==================== -->
+    <section id="tab-map" class="tab-pane space-y-6 hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+            <span>🗺️</span> Interactive Study Area & Sample Map
+          </h2>
+          <p class="text-xs text-slate-400">Click any study location pin to view sample metadata, average metrics, and Professor Aqua's field summary.</p>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Good (&lt;300 TDS)</span>
+          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Moderate (300-600)</span>
+          <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Attention (&gt;600)</span>
+        </div>
+      </div>
+
+      <!-- MAP CANVAS / SVG -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 card-glass rounded-2xl p-4 border border-slate-800 relative overflow-hidden">
+          <div class="absolute top-3 right-3 z-10 bg-slate-900/80 px-2.5 py-1 rounded text-[11px] text-slate-400 border border-slate-700">
+            Study Grid: Urban District Ward GIS
+          </div>
+
+          <svg viewBox="0 0 800 500" class="w-full h-auto bg-slate-900 rounded-xl border border-slate-800/80">
+            <!-- Simulated River Basin -->
+            <path d="M 0 350 Q 200 280, 400 320 T 800 250 L 800 310 Q 600 370, 400 380 T 0 420 Z" fill="#0369a1" opacity="0.35"/>
+            <text x="550" y="300" fill="#38bdf8" font-size="12" font-style="italic" opacity="0.7">Sita River Basin</text>
+
+            <!-- District Contour Lines -->
+            <path d="M 50 100 Q 250 80, 450 140 T 750 110" fill="none" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="4,4"/>
+            <path d="M 80 220 Q 300 200, 520 240 T 760 210" fill="none" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="4,4"/>
+            
+            <!-- Arterials -->
+            <path d="M 380 30 L 410 480" stroke="#334155" stroke-width="3"/>
+            <path d="M 50 250 L 750 220" stroke="#334155" stroke-width="3"/>
+            <text x="420" y="50" fill="#64748b" font-size="10">Grand Trunk Arterial</text>
+
+            <!-- Pins -->
+            <!-- Ward 1 -->
+            <g class="map-pin cursor-pointer" onclick="AreaMap.selectArea(0)">
+              <circle cx="220" cy="110" r="22" fill="#10b981" opacity="0.2"/>
+              <circle cx="220" cy="110" r="12" fill="#10b981" stroke="#ffffff" stroke-width="2"/>
+              <text x="220" y="114" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">1</text>
+              <text x="220" y="138" fill="#e2e8f0" font-size="11" font-weight="bold" text-anchor="middle">North Enclave</text>
+              <text x="220" y="152" fill="#94a3b8" font-size="9" text-anchor="middle">Tap Water • TDS 210</text>
+            </g>
+
+            <!-- Ward 2 -->
+            <g class="map-pin cursor-pointer" onclick="AreaMap.selectArea(1)">
+              <circle cx="580" cy="130" r="22" fill="#10b981" opacity="0.2"/>
+              <circle cx="580" cy="130" r="12" fill="#10b981" stroke="#ffffff" stroke-width="2"/>
+              <text x="580" y="134" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">2</text>
+              <text x="580" y="158" fill="#e2e8f0" font-size="11" font-weight="bold" text-anchor="middle">Sector 4 Residential</text>
+              <text x="580" y="172" fill="#94a3b8" font-size="9" text-anchor="middle">Municipal • TDS 265</text>
+            </g>
+
+            <!-- Ward 3 -->
+            <g class="map-pin cursor-pointer" onclick="AreaMap.selectArea(2)">
+              <circle cx="280" cy="310" r="22" fill="#f59e0b" opacity="0.2"/>
+              <circle cx="280" cy="310" r="12" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
+              <text x="280" y="314" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">3</text>
+              <text x="280" y="338" fill="#e2e8f0" font-size="11" font-weight="bold" text-anchor="middle">Riverbank Ward</text>
+              <text x="280" y="352" fill="#94a3b8" font-size="9" text-anchor="middle">Shallow Well • TDS 480</text>
+            </g>
+
+            <!-- Ward 4 -->
+            <g class="map-pin cursor-pointer" onclick="AreaMap.selectArea(3)">
+              <circle cx="640" cy="380" r="22" fill="#f43f5e" opacity="0.2"/>
+              <circle cx="640" cy="380" r="12" fill="#f43f5e" stroke="#ffffff" stroke-width="2"/>
+              <text x="640" y="384" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">4</text>
+              <text x="640" y="408" fill="#e2e8f0" font-size="11" font-weight="bold" text-anchor="middle">Industrial Colony</text>
+              <text x="640" y="422" fill="#f43f5e" font-size="9" font-weight="bold" text-anchor="middle">Deep Borewell • TDS 720</text>
+            </g>
+
+            <!-- Ward 5 -->
+            <g class="map-pin cursor-pointer" onclick="AreaMap.selectArea(4)">
+              <circle cx="390" cy="210" r="22" fill="#f59e0b" opacity="0.2"/>
+              <circle cx="390" cy="210" r="12" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
+              <text x="390" y="214" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">5</text>
+              <text x="390" y="238" fill="#e2e8f0" font-size="11" font-weight="bold" text-anchor="middle">Central Market</text>
+              <text x="390" y="252" fill="#94a3b8" font-size="9" text-anchor="middle">Mixed Supply • TDS 390</text>
+            </g>
+
+            <!-- Ward 6 -->
+            <g class="map-pin cursor-pointer" onclick="AreaMap.selectArea(5)">
+              <circle cx="120" cy="240" r="22" fill="#10b981" opacity="0.2"/>
+              <circle cx="120" cy="240" r="12" fill="#10b981" stroke="#ffffff" stroke-width="2"/>
+              <text x="120" y="244" fill="#ffffff" font-size="10" font-weight="bold" text-anchor="middle">6</text>
+              <text x="120" y="268" fill="#e2e8f0" font-size="11" font-weight="bold" text-anchor="middle">Green Valley</text>
+              <text x="120" y="282" fill="#94a3b8" font-size="9" text-anchor="middle">Spring/Tank • TDS 175</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Area Profile Card -->
+        <div class="card-glass rounded-2xl p-5 border border-slate-800 flex flex-col justify-between" id="map-area-card">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-cyan-400 font-mono font-semibold uppercase" id="map-card-id">WARD #4 SELECTED</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-950 text-rose-300 border border-rose-800" id="map-card-status">Attention: Elevated TDS</span>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white" id="map-card-name">Industrial Colony</h3>
+              <p class="text-xs text-slate-400 mt-0.5" id="map-card-source">Primary Source: Commercial & Domestic Deep Borewell (180ft)</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div class="bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">
+                <span class="text-slate-400 block text-[11px]">Average TDS</span>
+                <span class="text-base font-bold text-rose-400" id="map-card-tds">720 mg/L</span>
+                <span class="text-[10px] text-slate-500 block">Limit: 500 mg/L</span>
+              </div>
+              <div class="bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">
+                <span class="text-slate-400 block text-[11px]">Average pH</span>
+                <span class="text-base font-bold text-emerald-400" id="map-card-ph">7.3</span>
+                <span class="text-[10px] text-slate-500 block">Normal (6.5-8.5)</span>
+              </div>
+              <div class="bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">
+                <span class="text-slate-400 block text-[11px]">Hardness</span>
+                <span class="text-base font-bold text-amber-400" id="map-card-hard">340 mg/L</span>
+                <span class="text-[10px] text-slate-500 block">Slightly hard</span>
+              </div>
+              <div class="bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">
+                <span class="text-slate-400 block text-[11px]">Turbidity</span>
+                <span class="text-base font-bold text-emerald-400" id="map-card-turb">0.8 NTU</span>
+                <span class="text-[10px] text-slate-500 block">Clear (&lt;1 NTU)</span>
+              </div>
+            </div>
+
+            <div class="bg-cyan-950/40 p-3 rounded-xl border border-cyan-800/40 text-xs">
+              <span class="text-cyan-300 font-semibold flex items-center gap-1.5 mb-1">
+                <span>📋</span> Field Observation:
+              </span>
+              <p class="text-slate-300 text-[12px] leading-relaxed" id="map-card-obs">
+                Water in Industrial Colony exhibits mineral saturation resulting from deeper aquifer extraction. While microbiologically clear, mineral scaling is common in household boilers.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-800 space-y-2">
+            <button onclick="App.switchTab('dashboard')" class="w-full py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-xs transition">
+              Open Full Dashboard for this Ward →
+            </button>
+            <button onclick="AreaMap.explainArea(AreaMap.areas[AreaMap.selectedAreaIndex])" class="w-full py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-medium text-xs border border-slate-700 flex items-center justify-center gap-1.5 transition">
+              <span>👨‍🔬</span> Hear Professor Aqua's Ward Analysis
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: ANALYTICS DASHBOARD ==================== -->
+    <section id="tab-dashboard" class="tab-pane space-y-6 hidden">
+      <div class="card-glass rounded-2xl p-5 border border-slate-800">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-xl font-bold text-white flex items-center gap-2">
+              <span>📊</span> Water Quality Analytics Dashboard
+            </h2>
+            <p class="text-xs text-slate-400">Area-wise comparison with minimum, average, and maximum bounds</p>
+          </div>
+
+          <!-- Controls -->
+          <div class="flex flex-wrap items-center gap-2 text-xs">
+            <div>
+              <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Parameter</label>
+              <select id="dash-param-select" onchange="Dashboard.render()" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-white focus:outline-none focus:border-cyan-500">
+                <option value="tds">Total Dissolved Solids (TDS, mg/L)</option>
+                <option value="ph">pH Level (Acidity / Alkalinity)</option>
+                <option value="hardness">Total Hardness (as CaCO3, mg/L)</option>
+                <option value="turbidity">Turbidity (NTU)</option>
+                <option value="ec">Electrical Conductivity (µS/cm)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Water Source</label>
+              <select id="dash-source-select" onchange="Dashboard.render()" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-white focus:outline-none focus:border-cyan-500">
+                <option value="all">All Sources (Combined)</option>
+                <option value="municipal">Municipal Tap Supply</option>
+                <option value="borewell">Groundwater / Borewell</option>
+                <option value="surface">Surface / River Water</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- SVG Bar Chart -->
+        <div class="mt-6 pt-4 border-t border-slate-800">
+          <div class="flex items-center justify-between text-xs mb-3">
+            <div class="flex items-center gap-4">
+              <span class="text-slate-300 font-semibold" id="chart-title">Area Comparison: TDS (mg/L)</span>
+              <span class="hidden sm:inline text-slate-500">| Tap any bar to inspect range and trigger explanation</span>
+            </div>
+            <div class="flex items-center gap-3 text-[11px]">
+              <span class="flex items-center gap-1.5 text-slate-400">
+                <span class="w-3 h-3 rounded bg-cyan-500"></span> Average
+              </span>
+              <span class="flex items-center gap-1.5 text-slate-400">
+                <span class="w-3 h-1 bg-slate-400"></span> Min/Max Range
+              </span>
+              <span class="flex items-center gap-1.5 text-rose-400">
+                <span class="w-3 h-0.5 bg-rose-500 border-b border-dashed border-rose-500"></span> BIS Standard Limit
+              </span>
+            </div>
+          </div>
+
+          <div class="w-full h-72 sm:h-80 bg-slate-950/70 rounded-xl p-4 border border-slate-800/80 relative">
+            <svg id="dashboard-svg-chart" class="w-full h-full" viewBox="0 0 700 260" preserveAspectRatio="none">
+              <!-- Rendered via JS -->
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- SELECTED BAR POPUP / INSPECTION SHEET -->
+      <div id="bar-inspection-panel" class="card-glass rounded-2xl p-5 border border-cyan-500/40 shadow-xl transition-all">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-cyan-950 border border-cyan-700 flex items-center justify-center text-cyan-400 text-lg">
+              🔍
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-base font-bold text-white" id="bar-sheet-area">Industrial Colony</h3>
+                <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-950 text-rose-300 border border-rose-800" id="bar-sheet-tag">Potential Concern: Elevated TDS</span>
+              </div>
+              <p class="text-xs text-slate-400" id="bar-sheet-param">Selected Parameter: Total Dissolved Solids (TDS)</p>
+            </div>
+          </div>
+          <button onclick="Dashboard.explainBar()" class="px-3 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold flex items-center gap-1.5 transition">
+            <span>🎙️</span> Explain This Result
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 my-4">
+          <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 text-center">
+            <span class="text-[11px] text-slate-400 block">Minimum Observed</span>
+            <span class="text-lg font-bold text-white" id="bar-sheet-min">650 mg/L</span>
+          </div>
+          <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 text-center">
+            <span class="text-[11px] text-slate-400 block">Mean / Average</span>
+            <span class="text-lg font-bold text-cyan-400" id="bar-sheet-avg">720 mg/L</span>
+          </div>
+          <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 text-center">
+            <span class="text-[11px] text-slate-400 block">Maximum Observed</span>
+            <span class="text-lg font-bold text-white" id="bar-sheet-max">810 mg/L</span>
+          </div>
+          <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 text-center">
+            <span class="text-[11px] text-slate-400 block">BIS IS 10500 Standard</span>
+            <span class="text-lg font-bold text-rose-400" id="bar-sheet-limit">500 mg/L (Max 2000)</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs bg-slate-900/60 p-3.5 rounded-xl border border-slate-800/80">
+          <div>
+            <h5 class="text-slate-300 font-semibold flex items-center gap-1 mb-1">
+              <span>⚠️</span> Scientific Observation:
+            </h5>
+            <p class="text-slate-400 leading-relaxed" id="bar-sheet-obs">
+              TDS levels exceed the standard acceptable limit of 500 mg/L due to hard mineral ions. Do not panic: TDS alone is not a disease vector, but impacts palatability and boiler scale.
+            </p>
+          </div>
+          <div>
+            <h5 class="text-emerald-300 font-semibold flex items-center gap-1 mb-1">
+              <span>💡</span> Recommended Action:
+            </h5>
+            <p class="text-slate-400 leading-relaxed" id="bar-sheet-rec">
+              For drinking and cooking, use dual-stage reverse osmosis (RO) or ion-exchange softening. Boiling alone will NOT reduce dissolved solids.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== TAB 4: WATER ANALYZER ==================== -->
+    <section id="tab-analyzer" class="tab-pane space-y-6 hidden">
+      <div class="card-glass rounded-2xl p-6 border border-slate-800">
+        <div class="max-w-2xl">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-cyan-950 text-cyan-300 text-xs font-semibold mb-2">
+            <span>🔬</span> Interactive Diagnostic Engine
+          </div>
+          <h2 class="text-2xl font-bold text-white">Water Quality Analyzer</h2>
+          <p class="text-xs text-slate-400 mt-1">
+            Enter test strip, probe, or laboratory readings to receive an instant multi-parameter assessment based on documented drinking water standards (BIS IS 10500:2012 / WHO).
+          </p>
+        </div>
+
+        <!-- Presets -->
+        <div class="mt-4 flex flex-wrap items-center gap-2 text-xs">
+          <span class="text-slate-400 font-medium">Load Demo Preset:</span>
+          <button onclick="Analyzer.loadPreset('muni')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 transition">
+            🚰 Municipal Tap Water
+          </button>
+          <button onclick="Analyzer.loadPreset('deep_bore')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 transition">
+            ⛏️ Hard Deep Borewell
+          </button>
+          <button onclick="Analyzer.loadPreset('ro_purified')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-slate-700 transition">
+            ✨ RO + UV Purified
+          </button>
+          <button onclick="Analyzer.loadPreset('river_runoff')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-rose-300 border border-slate-700 transition">
+            🌊 Surface River Runoff
+          </button>
+        </div>
+
+        <!-- Sliders & Output -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6 pt-6 border-t border-slate-800">
+          <div class="lg:col-span-2 space-y-4">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+              <div>
+                <label class="block text-slate-400 mb-1">Sample ID / Label</label>
+                <input type="text" id="an-id" value="SMP-2026-042" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-xs">
+              </div>
+              <div>
+                <label class="block text-slate-400 mb-1">Study Area / Locality</label>
+                <input type="text" id="an-area" value="Civil Lines - Block B" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-xs">
+              </div>
+              <div>
+                <label class="block text-slate-400 mb-1">Water Source</label>
+                <select id="an-source" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-xs">
+                  <option>Municipal Pipe Line</option>
+                  <option>Submersible Borewell</option>
+                  <option>Community Tanker</option>
+                  <option>Open Well</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Parameters Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-800">
+                <div class="flex justify-between items-center text-xs mb-1">
+                  <span class="text-white font-semibold">pH Level</span>
+                  <span class="text-cyan-400 font-mono font-bold" id="val-ph-display">7.4</span>
+                </div>
+                <input type="range" id="input-ph" min="4.0" max="10.5" step="0.1" value="7.4" oninput="Analyzer.calculate()" class="w-full accent-cyan-400">
+                <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                  <span>Acidic (4.0)</span>
+                  <span class="text-emerald-400 font-semibold">Safe: 6.5 - 8.5</span>
+                  <span>Alkaline (10.5)</span>
+                </div>
+              </div>
+
+              <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-800">
+                <div class="flex justify-between items-center text-xs mb-1">
+                  <span class="text-white font-semibold">TDS (mg/L)</span>
+                  <span class="text-cyan-400 font-mono font-bold" id="val-tds-display">320 mg/L</span>
+                </div>
+                <input type="range" id="input-tds" min="20" max="2200" step="10" value="320" oninput="Analyzer.calculate()" class="w-full accent-cyan-400">
+                <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                  <span>Pure RO (20)</span>
+                  <span class="text-emerald-400 font-semibold">Desirable: &lt;500</span>
+                  <span>Saline (&gt;2000)</span>
+                </div>
+              </div>
+
+              <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-800">
+                <div class="flex justify-between items-center text-xs mb-1">
+                  <span class="text-white font-semibold">Turbidity (NTU)</span>
+                  <span class="text-cyan-400 font-mono font-bold" id="val-turb-display">0.6 NTU</span>
+                </div>
+                <input type="range" id="input-turb" min="0.1" max="15.0" step="0.1" value="0.6" oninput="Analyzer.calculate()" class="w-full accent-cyan-400">
+                <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                  <span>Crystal Clear (0.1)</span>
+                  <span class="text-emerald-400 font-semibold">BIS: &lt;1.0 NTU</span>
+                  <span>Cloudy (15.0)</span>
+                </div>
+              </div>
+
+              <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-800">
+                <div class="flex justify-between items-center text-xs mb-1">
+                  <span class="text-white font-semibold">Total Hardness (mg/L CaCO3)</span>
+                  <span class="text-cyan-400 font-mono font-bold" id="val-hard-display">180 mg/L</span>
+                </div>
+                <input type="range" id="input-hard" min="30" max="800" step="10" value="180" oninput="Analyzer.calculate()" class="w-full accent-cyan-400">
+                <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                  <span>Soft (&lt;75)</span>
+                  <span class="text-emerald-400 font-semibold">Desirable: &lt;200</span>
+                  <span>Very Hard (&gt;600)</span>
+                </div>
+              </div>
+
+              <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-800 sm:col-span-2">
+                <div class="flex justify-between items-center text-xs mb-1">
+                  <span class="text-white font-semibold">Electrical Conductivity (EC, µS/cm)</span>
+                  <span class="text-cyan-400 font-mono font-bold" id="val-ec-display">480 µS/cm</span>
+                </div>
+                <input type="range" id="input-ec" min="50" max="3000" step="20" value="480" oninput="Analyzer.calculate()" class="w-full accent-cyan-400">
+                <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                  <span>Low ion concentration</span>
+                  <span class="text-emerald-400 font-semibold">Standard: &lt;750 µS/cm</span>
+                  <span>High ion load</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Diagnostic Result Card -->
+          <div class="card-glass rounded-xl p-5 border border-cyan-500/30 flex flex-col justify-between" id="analyzer-result-box">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <span class="text-xs text-slate-400 uppercase font-medium">Diagnostic Verdict</span>
+                <span id="res-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-950 text-emerald-300 border border-emerald-800">
+                  Potable / Good
+                </span>
+              </div>
+
+              <div class="text-center py-2">
+                <span class="text-xs text-slate-400">Calculated Water Quality Index</span>
+                <div class="text-4xl font-black text-emerald-400 mt-1" id="res-wqi">88.2</div>
+                <div class="text-xs text-slate-400 mt-1" id="res-wqi-grade">Grade A: Excellent Drinking Water</div>
+              </div>
+
+              <div class="space-y-2 text-xs">
+                <div class="flex justify-between items-center py-1 border-b border-slate-800/80">
+                  <span class="text-slate-300">pH Assessment</span>
+                  <span id="res-ph-tag" class="text-emerald-400 font-semibold">✓ Normal (7.4)</span>
+                </div>
+                <div class="flex justify-between items-center py-1 border-b border-slate-800/80">
+                  <span class="text-slate-300">TDS Assessment</span>
+                  <span id="res-tds-tag" class="text-emerald-400 font-semibold">✓ Desirable (320 mg/L)</span>
+                </div>
+                <div class="flex justify-between items-center py-1 border-b border-slate-800/80">
+                  <span class="text-slate-300">Turbidity</span>
+                  <span id="res-turb-tag" class="text-emerald-400 font-semibold">✓ Clear (0.6 NTU)</span>
+                </div>
+                <div class="flex justify-between items-center py-1">
+                  <span class="text-slate-300">Hardness</span>
+                  <span id="res-hard-tag" class="text-emerald-400 font-semibold">✓ Moderate (180 mg/L)</span>
+                </div>
+              </div>
+
+              <div class="bg-slate-900/90 p-3 rounded-lg border border-slate-800 text-xs">
+                <span class="text-cyan-300 font-semibold block mb-1">🎓 Educational Interpretation:</span>
+                <p class="text-slate-300 leading-relaxed text-[11px]" id="res-interpretation">
+                  All measured parameters fall cleanly within the BIS IS 10500:2012 desirable drinking thresholds. Minerals provide essential taste and nutritional electrolytes. Standard boiling or candle filtration is adequate.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-800 space-y-2">
+              <button onclick="Analyzer.explainDiagnosis()" class="w-full py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow transition">
+                👨‍🔬 Ask Prof. Aqua to Explain This Sample
+              </button>
+              <button onclick="Analyzer.saveSample()" class="w-full py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-xs border border-slate-700 transition">
+                💾 Save Sample to Project Dataset
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 5: SURVEY & AWARENESS ==================== -->
+    <section id="tab-survey" class="tab-pane space-y-6 hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Survey Form -->
+        <div class="card-glass rounded-2xl p-5 border border-slate-800">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-cyan-950 text-cyan-300 text-xs font-semibold mb-2">
+            <span>📝</span> Citizen Science
+          </div>
+          <h3 class="text-lg font-bold text-white">Community Survey</h3>
+          <p class="text-xs text-slate-400 mb-4">Submit anonymous water usage & awareness data from your household.</p>
+
+          <form id="community-survey-form" onsubmit="Survey.submit(event)" class="space-y-3.5 text-xs">
+            <div>
+              <label class="block text-slate-300 mb-1 font-medium">Select Your Ward / Area</label>
+              <select id="srv-area" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-xs">
+                <option value="1">North Enclave (Ward 1)</option>
+                <option value="2">Sector 4 Residential (Ward 2)</option>
+                <option value="3">Riverbank Ward (Ward 3)</option>
+                <option value="4" selected>Industrial Colony (Ward 4)</option>
+                <option value="5">Central Market (Ward 5)</option>
+                <option value="6">Green Valley (Ward 6)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-slate-300 mb-1 font-medium">Primary Household Water Source</label>
+              <select id="srv-source" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-xs">
+                <option value="Municipal Tap">Municipal Tap Supply</option>
+                <option value="Borewell">Private Borewell / Groundwater</option>
+                <option value="Tanker">Commercial Water Tanker</option>
+                <option value="Community Plant">Community Plant / Canned Water</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-slate-300 mb-1 font-medium">Purification Practice at Home</label>
+              <select id="srv-purification" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-xs">
+                <option value="Reverse Osmosis (RO)">Reverse Osmosis (RO) System</option>
+                <option value="Boiling">Boiling before drinking</option>
+                <option value="UV / Candle Filter">UV / Candle Filter</option>
+                <option value="Direct Consumption">Direct consumption (No filtration)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-slate-300 mb-1 font-medium">Have you ever had your water tested?</label>
+              <div class="flex items-center space-x-4 pt-1">
+                <label class="flex items-center space-x-2">
+                  <input type="radio" name="tested" value="yes" class="accent-cyan-400">
+                  <span>Yes, tested</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" name="tested" value="no" checked class="accent-cyan-400">
+                  <span>Never tested</span>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-slate-300 mb-1 font-medium">Do you understand what "TDS" measures?</label>
+              <div class="flex items-center space-x-4 pt-1">
+                <label class="flex items-center space-x-2">
+                  <input type="radio" name="tds_aware" value="yes" class="accent-cyan-400">
+                  <span>Yes, I know</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" name="tds_aware" value="no" checked class="accent-cyan-400">
+                  <span>Not sure</span>
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="w-full py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition shadow-md shadow-cyan-500/20">
+              Submit Survey Response
+            </button>
+          </form>
+        </div>
+
+        <!-- Awareness Analytics -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="card-glass rounded-2xl p-5 border border-slate-800">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h3 class="text-base font-bold text-white flex items-center gap-2">
+                  <span>📈</span> Community Awareness Findings
+                </h3>
+                <p class="text-xs text-slate-400">Aggregated from <span id="survey-count-text" class="text-cyan-400 font-bold">394</span> surveyed community residents</p>
+              </div>
+              <button onclick="ProfessorAqua.explain('stat_survey')" class="text-xs text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+                <span>🎙️</span> Explain Charts
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+                <h4 class="text-xs font-semibold text-white mb-2">Water Sources Distribution</h4>
+                <div class="space-y-2 text-xs">
+                  <div>
+                    <div class="flex justify-between text-[11px] mb-0.5">
+                      <span class="text-slate-300">Municipal Tap Supply</span>
+                      <span class="text-cyan-400 font-semibold" id="pct-muni">51.2%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                      <div class="bg-cyan-500 h-full rounded-full" id="bar-muni" style="width: 51.2%"></div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="flex justify-between text-[11px] mb-0.5">
+                      <span class="text-slate-300">Private Borewell / Groundwater</span>
+                      <span class="text-cyan-400 font-semibold" id="pct-bore">32.8%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                      <div class="bg-sky-500 h-full rounded-full" id="bar-bore" style="width: 32.8%"></div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="flex justify-between text-[11px] mb-0.5">
+                      <span class="text-slate-300">Community Tanker</span>
+                      <span class="text-cyan-400 font-semibold" id="pct-tank">11.4%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                      <div class="bg-amber-500 h-full rounded-full" id="bar-tank" style="width: 11.4%"></div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="flex justify-between text-[11px] mb-0.5">
+                      <span class="text-slate-300">Bottled / Community Plant</span>
+                      <span class="text-cyan-400 font-semibold" id="pct-can">4.6%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                      <div class="bg-emerald-500 h-full rounded-full" id="bar-can" style="width: 4.6%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+                <h4 class="text-xs font-semibold text-white mb-2">Water Awareness & Practices</h4>
+                <div class="space-y-3 text-xs">
+                  <div>
+                    <div class="flex justify-between text-[11px] mb-0.5">
+                      <span class="text-slate-300">Uses Active Purification (RO/Boil)</span>
+                      <span class="text-emerald-400 font-semibold" id="pct-purified">68.5%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                      <div class="bg-emerald-500 h-full rounded-full" id="bar-purified" style="width: 68.5%"></div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="flex justify-between text-[11px] mb-0.5">
+                      <span class="text-slate-300">Have Ever Tested Their Water</span>
+                      <span class="text-rose-400 font-semibold" id="pct-tested">19.2%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                      <div class="bg-rose-500 h-full rounded-full" id="bar-tested" style="width: 19.2%"></div>
+                    </div>
+                    <span class="text-[10px] text-slate-500 mt-0.5 block">Critical Gap: Over 80% drink untested water</span>
+                  </div>
+
+                  <div>
+                    <div class="flex justify-between text-[11px] mb-0.5">
+                      <span class="text-slate-300">Understand TDS & Mineral Metrics</span>
+                      <span class="text-amber-400 font-semibold" id="pct-aware">38.4%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                      <div class="bg-amber-500 h-full rounded-full" id="bar-aware" style="width: 38.4%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 p-3 rounded-xl bg-cyan-950/30 border border-cyan-800/40 text-xs flex items-start gap-2.5">
+              <span class="text-base">💡</span>
+              <div>
+                <span class="text-cyan-300 font-semibold">CEP Research Takeaway:</span>
+                <p class="text-slate-300 text-[11px] mt-0.5 leading-relaxed">
+                  While 68% of households attempt purification, fewer than 20% have ever checked their water's actual composition. Many households in low-TDS zones unnecessarily over-filter their water with RO (stripping good minerals), while households in high-mineral wards boil water expecting it to soften minerals. Professor Aqua directly closes this knowledge gap.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== TAB 6: WATER GUIDE ==================== -->
+    <section id="tab-guide" class="tab-pane space-y-6 hidden">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+        <div>
+          <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+            <span>📚</span> Water Parameter Knowledge Center
+          </h2>
+          <p class="text-xs text-slate-400">Scientific benchmarks, physical meanings, and public health impact according to BIS IS 10500:2012</p>
+        </div>
+        <button onclick="ProfessorAqua.explain('tds_detailed')" class="px-3 py-1.5 rounded-lg bg-cyan-950 text-cyan-300 border border-cyan-800 text-xs flex items-center gap-1.5">
+          <span>👨‍🔬</span> Professor Aqua's Guide Walkthrough
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <div class="card-glass rounded-2xl p-5 border border-slate-800 hover:border-cyan-500/40 transition">
+          <div class="flex items-center justify-between text-xs mb-3">
+            <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800 font-mono font-bold">TDS</span>
+            <span class="text-slate-400 text-[11px]">Unit: mg/L (ppm)</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Total Dissolved Solids</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            The combined total of all organic and inorganic substances dissolved in water, predominantly calcium, magnesium, sodium, potassium, chlorides, and sulfates.
+          </p>
+          <div class="mt-3 bg-slate-900/90 p-2.5 rounded-lg border border-slate-800 text-[11px] space-y-1">
+            <div class="flex justify-between"><span class="text-slate-400">Acceptable Limit:</span> <strong class="text-emerald-400">Up to 500 mg/L</strong></div>
+            <div class="flex justify-between"><span class="text-slate-400">Permissible Limit:</span> <strong class="text-amber-400">2000 mg/L (if no alt source)</strong></div>
+          </div>
+          <button onclick="ProfessorAqua.explain('tds_detailed')" class="mt-4 w-full py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-medium border border-slate-700 transition">
+            Hear Full Explanation ↗
+          </button>
+        </div>
+
+        <div class="card-glass rounded-2xl p-5 border border-slate-800 hover:border-cyan-500/40 transition">
+          <div class="flex items-center justify-between text-xs mb-3">
+            <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 font-mono font-bold">pH</span>
+            <span class="text-slate-400 text-[11px]">Logarithmic Scale</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Potential of Hydrogen</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            Measures how acidic or basic water is on a scale from 0 to 14. Neutral is 7.0. Water with pH &lt; 6.5 can corrode plumbing; pH &gt; 8.5 imparts a slippery feel and soda taste.
+          </p>
+          <div class="mt-3 bg-slate-900/90 p-2.5 rounded-lg border border-slate-800 text-[11px] space-y-1">
+            <div class="flex justify-between"><span class="text-slate-400">Desirable Range:</span> <strong class="text-emerald-400">6.5 to 8.5</strong></div>
+            <div class="flex justify-between"><span class="text-slate-400">Extreme Warning:</span> <strong class="text-rose-400">&lt;6.0 or &gt;9.2</strong></div>
+          </div>
+          <button onclick="ProfessorAqua.explain('ph_detailed')" class="mt-4 w-full py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-medium border border-slate-700 transition">
+            Hear Full Explanation ↗
+          </button>
+        </div>
+
+        <div class="card-glass rounded-2xl p-5 border border-slate-800 hover:border-cyan-500/40 transition">
+          <div class="flex items-center justify-between text-xs mb-3">
+            <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-400 border border-amber-800 font-mono font-bold">TURBIDITY</span>
+            <span class="text-slate-400 text-[11px]">Unit: NTU</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Cloudiness & Suspended Matter</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            The haziness of water caused by large numbers of individual particles (silt, clay, pathogens). High turbidity shields microbes from chlorine disinfection.
+          </p>
+          <div class="mt-3 bg-slate-900/90 p-2.5 rounded-lg border border-slate-800 text-[11px] space-y-1">
+            <div class="flex justify-between"><span class="text-slate-400">Acceptable Limit:</span> <strong class="text-emerald-400">&lt; 1.0 NTU</strong></div>
+            <div class="flex justify-between"><span class="text-slate-400">Permissible Limit:</span> <strong class="text-amber-400">5.0 NTU</strong></div>
+          </div>
+          <button onclick="ProfessorAqua.explain('turbidity_detailed')" class="mt-4 w-full py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-medium border border-slate-700 transition">
+            Hear Full Explanation ↗
+          </button>
+        </div>
+
+        <div class="card-glass rounded-2xl p-5 border border-slate-800 hover:border-cyan-500/40 transition">
+          <div class="flex items-center justify-between text-xs mb-3">
+            <span class="px-2 py-0.5 rounded bg-sky-950 text-sky-400 border border-sky-800 font-mono font-bold">HARDNESS</span>
+            <span class="text-slate-400 text-[11px]">as CaCO3 mg/L</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Total Hardness</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            Primarily caused by dissolved calcium and magnesium ions. Hard water prevents soap lathering and creates limescale inside geysers, pipes, and cooking pots.
+          </p>
+          <div class="mt-3 bg-slate-900/90 p-2.5 rounded-lg border border-slate-800 text-[11px] space-y-1">
+            <div class="flex justify-between"><span class="text-slate-400">Acceptable Limit:</span> <strong class="text-emerald-400">200 mg/L</strong></div>
+            <div class="flex justify-between"><span class="text-slate-400">Permissible Limit:</span> <strong class="text-amber-400">600 mg/L</strong></div>
+          </div>
+          <button onclick="ProfessorAqua.explain('hardness_detailed')" class="mt-4 w-full py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-medium border border-slate-700 transition">
+            Hear Full Explanation ↗
+          </button>
+        </div>
+
+        <div class="card-glass rounded-2xl p-5 border border-slate-800 hover:border-cyan-500/40 transition">
+          <div class="flex items-center justify-between text-xs mb-3">
+            <span class="px-2 py-0.5 rounded bg-indigo-950 text-indigo-400 border border-indigo-800 font-mono font-bold">EC</span>
+            <span class="text-slate-400 text-[11px]">Unit: µS/cm</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Electrical Conductivity</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            Measures water's ability to conduct an electric charge. Highly correlated with TDS because dissolved mineral salts dissociate into conductive ions.
+          </p>
+          <div class="mt-3 bg-slate-900/90 p-2.5 rounded-lg border border-slate-800 text-[11px] space-y-1">
+            <div class="flex justify-between"><span class="text-slate-400">Normal Range:</span> <strong class="text-emerald-400">100 - 800 µS/cm</strong></div>
+            <div class="flex justify-between"><span class="text-slate-400">Saline / High Ion:</span> <strong class="text-rose-400">&gt; 1500 µS/cm</strong></div>
+          </div>
+          <button onclick="ProfessorAqua.explain('ec_detailed')" class="mt-4 w-full py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-medium border border-slate-700 transition">
+            Hear Full Explanation ↗
+          </button>
+        </div>
+
+        <div class="card-glass rounded-2xl p-5 border border-cyan-900/50 bg-gradient-to-br from-slate-900 to-cyan-950/40">
+          <div class="flex items-center justify-between text-xs mb-3">
+            <span class="px-2 py-0.5 rounded bg-cyan-900 text-cyan-300 font-bold">FACT CHECK</span>
+            <span class="text-cyan-400 text-[11px]">Public Health</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Does Boiling Remove TDS?</h3>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            <strong class="text-rose-400">NO.</strong> Boiling kills biological bacteria and pathogens, but evaporates pure water vapour, slightly <em>increasing</em> the concentration of dissolved minerals!
+          </p>
+          <div class="mt-3 text-[11px] text-cyan-300 bg-slate-900/80 p-2 rounded border border-slate-800">
+            For biological safety: Boil / UV.<br>For high TDS / chemical salts: Reverse Osmosis.
+          </div>
+          <button onclick="ProfessorAqua.explain('boiling_myth')" class="mt-4 w-full py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold transition">
+            Explain This Myth ↗
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== TAB 7: REPORT GENERATOR ==================== -->
+    <section id="tab-report" class="tab-pane space-y-6 hidden">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 no-print">
+        <div>
+          <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+            <span>📄</span> Structured Project Report Generator
+          </h2>
+          <p class="text-xs text-slate-400">Generate formatted, evaluator-ready water quality dossiers from stored database records.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <select id="report-area-select" onchange="Report.render()" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white">
+            <option value="Industrial Colony">Industrial Colony (Ward 4)</option>
+            <option value="Riverbank Ward">Riverbank Ward (Ward 3)</option>
+            <option value="North Enclave">North Enclave (Ward 1)</option>
+            <option value="Sector 4 Residential">Sector 4 Residential (Ward 2)</option>
+            <option value="Central Market">Central Market (Ward 5)</option>
+            <option value="Green Valley">Green Valley (Ward 6)</option>
+          </select>
+          <button onclick="window.print()" class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow transition">
+            <span>🖨️</span> Print / Save PDF
+          </button>
+        </div>
+      </div>
+
+      <div id="printable-report" class="card-glass rounded-2xl p-6 sm:p-10 border border-slate-800 text-slate-200 shadow-2xl space-y-6 bg-slate-900">
+        
+        <div class="border-b border-slate-700 pb-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-black text-white">■ JAL<span class="text-cyan-400">CHECK</span></span>
+              <span class="text-xs px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 font-mono">OFFICIAL CEP REPORT</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Community Water Quality Assessment & Awareness Audit</p>
+          </div>
+          <div class="text-left sm:text-right text-xs text-slate-400 font-mono">
+            <div>Report Ref: <span class="text-cyan-400" id="rep-ref">JAL-2026-WD4</span></div>
+            <div>Generated: <span class="text-slate-300">September 2026</span></div>
+            <div>Standard: <span class="text-slate-300">BIS IS 10500:2012</span></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+          <div>
+            <span class="text-slate-500 block text-[11px]">Target Study Area</span>
+            <strong class="text-white text-sm" id="rep-area-name">Industrial Colony</strong>
+          </div>
+          <div>
+            <span class="text-slate-500 block text-[11px]">Primary Source Type</span>
+            <strong class="text-white text-sm" id="rep-source-type">Deep Borewell (Aquifer)</strong>
+          </div>
+          <div>
+            <span class="text-slate-500 block text-[11px]">Samples Tested</span>
+            <strong class="text-cyan-400 text-sm" id="rep-sample-count">24 Samples</strong>
+          </div>
+          <div>
+            <span class="text-slate-500 block text-[11px]">Locality Status</span>
+            <strong class="text-rose-400 text-sm" id="rep-status-tag">Potential Concern (TDS)</strong>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Physicochemical Measurements Table</h4>
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left border border-slate-800 rounded-lg overflow-hidden">
+              <thead class="bg-slate-950 text-slate-400 uppercase font-mono text-[10px]">
+                <tr>
+                  <th class="p-2.5">Parameter</th>
+                  <th class="p-2.5">Min Observed</th>
+                  <th class="p-2.5">Mean (Average)</th>
+                  <th class="p-2.5">Max Observed</th>
+                  <th class="p-2.5">BIS Desirable</th>
+                  <th class="p-2.5">Compliance Observation</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800" id="rep-table-body">
+                <!-- Rendered via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-2">
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+            <h5 class="font-bold text-white flex items-center gap-1.5">
+              <span>👥</span> Ward Survey Findings
+            </h5>
+            <ul class="text-slate-300 space-y-1 text-[11px] list-disc list-inside">
+              <li>Residents Surveyed in this Ward: <strong>68 households</strong></li>
+              <li>Reported Primary Supply: <strong>72% Borewell, 28% Tanker</strong></li>
+              <li>Households with RO or filtration: <strong>44%</strong></li>
+              <li>Prior testing awareness: <strong>Only 14% have tested</strong></li>
+            </ul>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+            <h5 class="font-bold text-cyan-300 flex items-center gap-1.5">
+              <span>👨‍🔬</span> Professor Aqua's Scientific Conclusion
+            </h5>
+            <p class="text-slate-300 text-[11px] leading-relaxed" id="rep-prof-conclusion">
+              The tested aquifer displays substantial mineral dissolution exceeding the 500 mg/L baseline, typical of deeper subterranean rock formations. Reverse osmosis purification recommended for drinking.
+            </p>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800 text-[10px] text-slate-500 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+          <div>
+            Data Integrity Notice: Laboratory benchmarks derived from Indian Standard IS 10500:2012 Drinking Water Specification.
+          </div>
+          <div class="font-mono text-slate-400">
+            CEP Department of Environmental Sciences & Civic Data
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== TAB 8: ABOUT CEP PROJECT ==================== -->
+    <section id="tab-about" class="tab-pane space-y-6 hidden">
+      <div class="card-glass rounded-2xl p-6 sm:p-8 border border-slate-800 space-y-6">
+        <div>
+          <span class="text-xs px-2.5 py-1 rounded bg-cyan-950 text-cyan-300 font-semibold uppercase">Academic & Community Specification</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white mt-2">About Project JalCheck</h2>
+          <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+            JalCheck is a Community Engagement Project (CEP) combining environmental science, data science, geographical visualization, and educational HCI (Human-Computer Interaction).
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <h4 class="font-bold text-cyan-400 text-sm mb-1">1. Research Objectives</h4>
+            <p class="text-slate-300 leading-relaxed">
+              Identify water quality disparities across municipal and groundwater sources; educate community residents without inciting panic; evaluate public water literacy through structured surveys.
+            </p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <h4 class="font-bold text-sky-400 text-sm mb-1">2. Scientific Methodology</h4>
+            <p class="text-slate-300 leading-relaxed">
+              Calibrated field probes and standard laboratory titrations (APHA standard methods) evaluated against Bureau of Indian Standards (BIS IS 10500:2012).
+            </p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <h4 class="font-bold text-emerald-400 text-sm mb-1">3. Professor Aqua USP</h4>
+            <p class="text-slate-300 leading-relaxed">
+              A universal, context-aware pedagogical guide with multi-state animations and voice synthesis that demystifies scientific graphs for citizens of any educational background.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-400 space-y-1 font-mono">
+          <div>Architecture: Pure Vanilla JS (ES6+) + Tailwind CSS + FastAPI + SQLite + Pandas/NumPy</div>
+          <div>Project Evaluator Guide: Full CRUD endpoints available for administrator CSV ingest and survey export.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== PROFESSOR AQUA COMPANION WIDGET ==================== -->
+  <div id="prof-aqua-widget" class="fixed bottom-4 right-4 z-50 max-w-sm sm:max-w-md w-full px-4 sm:px-0 transition-all duration-300">
+    <div class="card-glass rounded-2xl border border-cyan-500/50 shadow-2xl overflow-hidden backdrop-blur-xl bg-slate-900/95" style="box-shadow: 0 10px 35px -5px rgba(6, 182, 212, 0.35);">
+      
+      <!-- Widget Header -->
+      <div class="bg-gradient-to-r from-slate-900 via-cyan-950 to-slate-900 px-4 py-2.5 border-b border-cyan-800/40 flex items-center justify-between">
+        <div class="flex items-center space-x-2.5">
+          <div class="relative">
+            <div id="prof-avatar-box" class="w-8 h-8 rounded-full bg-cyan-600/30 border border-cyan-400 flex items-center justify-center text-lg floating-avatar">
+              👨‍🔬
+            </div>
+            <span id="prof-state-dot" class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-slate-900"></span>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-xs font-bold text-white tracking-wide">PROFESSOR AQUA</span>
+              <span id="prof-state-label" class="text-[9px] uppercase px-1.5 py-0.2 rounded bg-cyan-900/80 text-cyan-300 font-mono">GREETING</span>
+            </div>
+            <span class="text-[10px] text-slate-400">Universal Educational Guide</span>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-1.5 text-slate-400">
+          <button onclick="ProfessorAqua.speak(document.getElementById('prof-speech-text').textContent)" id="prof-play-btn" class="p-1.5 rounded hover:bg-slate-800 hover:text-cyan-300 transition" title="Replay Voice Explanation">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </button>
+          <button onclick="ProfessorAqua.toggleCollapse()" id="prof-collapse-btn" class="p-1.5 rounded hover:bg-slate-800 hover:text-white transition" title="Minimize / Expand">
+            <svg id="collapse-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Dialogue Bubble Content -->
+      <div id="prof-body-content" class="p-4 space-y-3 max-h-72 overflow-y-auto">
+        <div class="relative bg-slate-950/80 rounded-xl p-3 border border-slate-800 text-xs">
+          <div class="absolute -top-1.5 left-4 w-3 h-3 bg-slate-950 border-t border-l border-slate-800 transform rotate-45"></div>
+          
+          <p id="prof-speech-text" class="text-slate-200 text-xs leading-relaxed">
+            "Namaste! I am <strong>Professor Aqua</strong>, your interactive guide to community water science. JalCheck lets you explore real laboratory water samples from our district. Tap any chart, metric, or map pin, and I will explain what it means for your health!"
+          </p>
+        </div>
+
+        <!-- Quick Question Prompts -->
+        <div class="space-y-1.5 pt-1">
+          <span class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold block">Ask Professor Aqua:</span>
+          <div class="flex flex-wrap gap-1.5 text-[11px]">
+            <button onclick="ProfessorAqua.explain('tds_intro')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700/60 transition">
+              What is TDS?
+            </button>
+            <button onclick="ProfessorAqua.explain('boiling_myth')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700/60 transition">
+              Does boiling remove minerals?
+            </button>
+            <button onclick="ProfessorAqua.explain('wqi_intro')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700/60 transition">
+              How is WQI calculated?
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Bar -->
+      <div id="prof-footer" class="px-4 py-2 bg-slate-950 text-[10px] text-slate-400 border-t border-slate-800 flex items-center justify-between">
+        <span class="flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Context-Aware Engine
+        </span>
+        <button onclick="ProfessorAqua.explain('greeting')" class="text-cyan-400 hover:text-cyan-300 underline font-medium">Reset Guide</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800 bg-slate-950 py-6 px-4 text-center text-xs text-slate-500 mt-12 no-print">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-2">
+        <span class="text-white font-bold">■ JALCHECK</span>
+        <span>— Water Quality Analysis & Community Awareness CEP</span>
+      </div>
+      <div class="text-slate-400 text-[11px]">
+        Standards Reference: <strong>BIS IS 10500:2012</strong> | Project Evaluator Interface
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOADER (Modular Vanilla JS Components) -->
+  <script src="js/api.js"></script>
+  <script src="js/professorAqua.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/analyzer.js"></script>
+  <script src="js/survey.js"></script>
+  <script src="js/report.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
