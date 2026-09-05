@@ -20,18 +20,117 @@ const Dashboard = {
   },
 
   fallbackData: [
-    { area_name: "Shivaji Nagar", ward: "Ward 1", count: 10, min: 342, avg: 387.6, max: 433, is_elevated: false, obs: "Safe municipal & community tap water." },
-    { area_name: "Salwad", ward: "Ward 2", count: 10, min: 368, avg: 416.7, max: 463, is_elevated: false, obs: "Moderate calcium hardness." },
-    { area_name: "Katkar", ward: "Ward 3", count: 10, min: 394, avg: 449.6, max: 503, is_elevated: true, obs: "Peak TDS reaches 503 mg/L in municipal line." },
-    { area_name: "Mahavir Nagar", ward: "Ward 4", count: 10, min: 351, avg: 397.0, max: 451, is_elevated: false, obs: "Good drinking quality with clear turbidity." },
-    { area_name: "Bhandarwada", ward: "Ward 5", count: 10, min: 378, avg: 436.3, max: 498, is_elevated: false, obs: "Elevated turbidity during extraction." },
-    { area_name: "Betegaon", ward: "Ward 6", count: 10, min: 326, avg: 365.4, max: 418, is_elevated: false, obs: "Lowest TDS in the district (326-418 mg/L)." },
-    { area_name: "Awadh Nagar", ward: "Ward 7", count: 10, min: 338, avg: 398.0, max: 465, is_elevated: false, obs: "Good balanced mineral content." },
-    { area_name: "Pam", ward: "Ward 8", count: 10, min: 369, avg: 443.2, max: 523, is_elevated: true, obs: "Deep borewell reaches 523 mg/L with elevated EC." },
-    { area_name: "Ganesh Nagar", ward: "Ward 9", count: 10, min: 351, avg: 423.9, max: 508, is_elevated: true, obs: "Borewell peak 508 mg/L; clear taps." },
-    { area_name: "Yadav Nagar", ward: "Ward 10", count: 10, min: 342, avg: 412.3, max: 496, is_elevated: false, obs: "Consistently conforms with Indian Standards." },
-    { area_name: "Azad Nagar", ward: "Ward 11", count: 10, min: 337, avg: 412.3, max: 509, is_elevated: true, obs: "Borderline TDS in deep borewell." }
-  ],
+    {
+        "area_name": "Shivaji Nagar",
+        "ward": "Ward 1",
+        "count": 10,
+        "min": 342.0,
+        "avg": 385.6,
+        "max": 433.0,
+        "is_elevated": false,
+        "obs": "Tested across 10 certified sites. Average TDS is 385.6 mg/L (max 433.0), pH is 7.51, Turbidity is 1.67 NTU."
+    },
+    {
+        "area_name": "Salwad",
+        "ward": "Ward 2",
+        "count": 10,
+        "min": 368.0,
+        "avg": 412.3,
+        "max": 463.0,
+        "is_elevated": false,
+        "obs": "Tested across 10 certified sites. Average TDS is 412.3 mg/L (max 463.0), pH is 7.54, Turbidity is 1.93 NTU."
+    },
+    {
+        "area_name": "Katkar",
+        "ward": "Ward 3",
+        "count": 10,
+        "min": 394.0,
+        "avg": 446.3,
+        "max": 503.0,
+        "is_elevated": true,
+        "obs": "Tested across 10 certified sites. Average TDS is 446.3 mg/L (max 503.0), pH is 7.55, Turbidity is 2.23 NTU."
+    },
+    {
+        "area_name": "Mahavir Nagar",
+        "ward": "Ward 4",
+        "count": 10,
+        "min": 351.0,
+        "avg": 397.0,
+        "max": 451.0,
+        "is_elevated": false,
+        "obs": "Tested across 10 certified sites. Average TDS is 397.0 mg/L (max 451.0), pH is 7.59, Turbidity is 1.74 NTU."
+    },
+    {
+        "area_name": "Bhandarwada",
+        "ward": "Ward 5",
+        "count": 10,
+        "min": 378.0,
+        "avg": 433.3,
+        "max": 498.0,
+        "is_elevated": false,
+        "obs": "Tested across 10 certified sites. Average TDS is 433.3 mg/L (max 498.0), pH is 7.52, Turbidity is 2.26 NTU."
+    },
+    {
+        "area_name": "Betegaon",
+        "ward": "Ward 6",
+        "count": 10,
+        "min": 326.0,
+        "avg": 365.4,
+        "max": 418.0,
+        "is_elevated": false,
+        "obs": "Tested across 10 certified sites. Average TDS is 365.4 mg/L (max 418.0), pH is 7.64, Turbidity is 1.48 NTU."
+    },
+    {
+        "area_name": "Awadh Nagar",
+        "ward": "Ward 7",
+        "count": 10,
+        "min": 338.0,
+        "avg": 398.0,
+        "max": 465.0,
+        "is_elevated": false,
+        "obs": "Tested across 10 certified sites. Average TDS is 398.0 mg/L (max 465.0), pH is 7.57, Turbidity is 1.84 NTU."
+    },
+    {
+        "area_name": "Pam",
+        "ward": "Ward 8",
+        "count": 10,
+        "min": 369.0,
+        "avg": 443.0,
+        "max": 523.0,
+        "is_elevated": true,
+        "obs": "Tested across 10 certified sites. Average TDS is 443.0 mg/L (max 523.0), pH is 7.55, Turbidity is 2.1 NTU."
+    },
+    {
+        "area_name": "Ganesh Nagar",
+        "ward": "Ward 9",
+        "count": 10,
+        "min": 351.0,
+        "avg": 423.8,
+        "max": 508.0,
+        "is_elevated": true,
+        "obs": "Tested across 10 certified sites. Average TDS is 423.8 mg/L (max 508.0), pH is 7.56, Turbidity is 2.0 NTU."
+    },
+    {
+        "area_name": "Yadav Nagar",
+        "ward": "Ward 10",
+        "count": 10,
+        "min": 342.0,
+        "avg": 413.1,
+        "max": 496.0,
+        "is_elevated": false,
+        "obs": "Tested across 10 certified sites. Average TDS is 413.1 mg/L (max 496.0), pH is 7.57, Turbidity is 1.98 NTU."
+    },
+    {
+        "area_name": "Azad Nagar",
+        "ward": "Ward 11",
+        "count": 10,
+        "min": 337.0,
+        "avg": 411.6,
+        "max": 509.0,
+        "is_elevated": true,
+        "obs": "Tested across 10 certified sites. Average TDS is 411.6 mg/L (max 509.0), pH is 7.57, Turbidity is 1.93 NTU."
+    }
+],
 
   async render() {
     const param = document.getElementById('dash-param-select').value;

@@ -1,6 +1,6 @@
 /**
  * Interactive Study Area & Sample Map Component
- * Accurately calibrated to real coordinates (11 Areas, 110 Certified Samples)
+ * Accurately calibrated to real Boisar/Palghar coordinates (11 Areas, 110 Certified Samples)
  */
 const AreaMap = {
   areas: [
@@ -8,10 +8,10 @@ const AreaMap = {
     "id": 1,
     "name": "Shivaji Nagar",
     "ward": "Ward 1",
-    "x": 624,
-    "y": 230,
-    "lat": 19.8016,
-    "lon": 72.7605,
+    "x": 562.2,
+    "y": 237.6,
+    "lat": 19.804566,
+    "lon": 72.753556,
     "samples": 10,
     "sources": "Municipal Tap, Borewell, Well, Community Tap",
     "tds": {
@@ -41,17 +41,17 @@ const AreaMap = {
     },
     "status": "Good Drinking Quality",
     "color": "emerald",
-    "obs": "Tested across 10 certified sites. Average TDS is 385.6 mg/L (max 433), pH is 7.51, Turbidity is 1.67 NTU.",
+    "obs": "Tested across 10 certified sites. Average TDS is 385.6 mg/L (max 433.0), pH is 7.51, Turbidity is 1.67 NTU.",
     "rec": "Routine boiling or candle filtration recommended."
   },
   {
     "id": 2,
     "name": "Salwad",
     "ward": "Ward 2",
-    "x": 400,
-    "y": 162,
-    "lat": 19.8075,
-    "lon": 72.753,
+    "x": 149.8,
+    "y": 334.5,
+    "lat": 19.79597,
+    "lon": 72.73759,
     "samples": 10,
     "sources": "Municipal Tap, Borewell, Well, Community Tap",
     "tds": {
@@ -80,18 +80,18 @@ const AreaMap = {
       "max": 936.0
     },
     "status": "Good Drinking Quality",
-    "color": "emerald",
-    "obs": "Tested across 10 certified sites. Average TDS is 412.3 mg/L (max 463), pH is 7.54, Turbidity is 1.93 NTU.",
+    "color": "cyan",
+    "obs": "Tested across 10 certified sites. Average TDS is 412.3 mg/L (max 463.0), pH is 7.54, Turbidity is 1.93 NTU.",
     "rec": "Routine boiling or candle filtration recommended."
   },
   {
     "id": 3,
     "name": "Katkar",
     "ward": "Ward 3",
-    "x": 582,
-    "y": 97,
-    "lat": 19.8131,
-    "lon": 72.7591,
+    "x": 139.5,
+    "y": 110.5,
+    "lat": 19.81585,
+    "lon": 72.73719,
     "samples": 10,
     "sources": "Municipal Tap, Borewell, Well, Community Tap",
     "tds": {
@@ -119,19 +119,19 @@ const AreaMap = {
       "avg": 888.5,
       "max": 1012.0
     },
-    "status": "Borderline TDS Peak (503 mg/L)",
-    "color": "rose",
-    "obs": "Tested across 10 certified sites. Average TDS is 446.3 mg/L (max 503), pH is 7.55, Turbidity is 2.23 NTU.",
-    "rec": "Dual-stage filtration recommended for high-mineral borewell sources."
+    "status": "Peak TDS 503.0 mg/L",
+    "color": "amber",
+    "obs": "Tested across 10 certified sites. Average TDS is 446.3 mg/L (max 503.0), pH is 7.55, Turbidity is 2.23 NTU.",
+    "rec": "Dual-stage filtration or RO recommended for high TDS borewell points."
   },
   {
     "id": 4,
     "name": "Mahavir Nagar",
     "ward": "Ward 4",
-    "x": 443,
-    "y": 289,
-    "lat": 19.7965,
-    "lon": 72.7544,
+    "x": 578.2,
+    "y": 331.8,
+    "lat": 19.796214,
+    "lon": 72.754173,
     "samples": 10,
     "sources": "Municipal Tap, Borewell, Well, Community Tap",
     "tds": {
@@ -161,17 +161,17 @@ const AreaMap = {
     },
     "status": "Good Drinking Quality",
     "color": "emerald",
-    "obs": "Tested across 10 certified sites. Average TDS is 397.0 mg/L (max 451), pH is 7.59, Turbidity is 1.74 NTU.",
+    "obs": "Tested across 10 certified sites. Average TDS is 397.0 mg/L (max 451.0), pH is 7.59, Turbidity is 1.74 NTU.",
     "rec": "Routine boiling or candle filtration recommended."
   },
   {
     "id": 5,
     "name": "Bhandarwada",
     "ward": "Ward 5",
-    "x": 653,
-    "y": 370,
-    "lat": 19.7895,
-    "lon": 72.7614,
+    "x": 760.5,
+    "y": 410.6,
+    "lat": 19.789214,
+    "lon": 72.761231,
     "samples": 10,
     "sources": "Municipal Tap, Borewell, Well, Community Tap",
     "tds": {
@@ -199,19 +199,19 @@ const AreaMap = {
       "avg": 859.2,
       "max": 1004.0
     },
-    "status": "Moderate Turbidity (2.3 NTU)",
-    "color": "amber",
-    "obs": "Tested across 10 certified sites. Average TDS is 433.3 mg/L (max 498), pH is 7.52, Turbidity is 2.26 NTU.",
+    "status": "Good Drinking Quality",
+    "color": "cyan",
+    "obs": "Tested across 10 certified sites. Average TDS is 433.3 mg/L (max 498.0), pH is 7.52, Turbidity is 2.26 NTU.",
     "rec": "Routine boiling or candle filtration recommended."
   },
   {
     "id": 6,
     "name": "Betegaon",
     "ward": "Ward 6",
-    "x": 550,
-    "y": 451,
-    "lat": 19.7825,
-    "lon": 72.758,
+    "x": 670.3,
+    "y": 489.5,
+    "lat": 19.782214,
+    "lon": 72.757741,
     "samples": 10,
     "sources": "Municipal Tap, Borewell, Well, Community Tap",
     "tds": {
@@ -241,17 +241,17 @@ const AreaMap = {
     },
     "status": "Good Drinking Quality",
     "color": "emerald",
-    "obs": "Tested across 10 certified sites. Average TDS is 365.4 mg/L (max 418), pH is 7.64, Turbidity is 1.48 NTU.",
+    "obs": "Tested across 10 certified sites. Average TDS is 365.4 mg/L (max 418.0), pH is 7.64, Turbidity is 1.48 NTU.",
     "rec": "Routine boiling or candle filtration recommended."
   },
   {
     "id": 7,
     "name": "Awadh Nagar",
     "ward": "Ward 7",
-    "x": 466,
-    "y": 343,
+    "x": 599.5,
+    "y": 381.5,
     "lat": 19.7918,
-    "lon": 72.7552,
+    "lon": 72.755,
     "samples": 10,
     "sources": "Municipal Tap, Borewell, Well, Community Tap",
     "tds": {
@@ -281,17 +281,17 @@ const AreaMap = {
     },
     "status": "Good Drinking Quality",
     "color": "emerald",
-    "obs": "Tested across 10 certified sites. Average TDS is 398.0 mg/L (max 465), pH is 7.57, Turbidity is 1.84 NTU.",
+    "obs": "Tested across 10 certified sites. Average TDS is 398.0 mg/L (max 465.0), pH is 7.57, Turbidity is 1.84 NTU.",
     "rec": "Routine boiling or candle filtration recommended."
   },
   {
     "id": 8,
     "name": "Pam",
     "ward": "Ward 8",
-    "x": 149,
-    "y": 165,
-    "lat": 19.8072,
-    "lon": 72.7446,
+    "x": 328.3,
+    "y": 210.2,
+    "lat": 19.807,
+    "lon": 72.7445,
     "samples": 10,
     "sources": "Municipal Tap, Borewell, Well, Community Tap",
     "tds": {
@@ -319,19 +319,19 @@ const AreaMap = {
       "avg": 870.4,
       "max": 1061.0
     },
-    "status": "Borderline TDS Peak (523 mg/L)",
-    "color": "rose",
-    "obs": "Tested across 10 certified sites. Average TDS is 443.0 mg/L (max 523), pH is 7.55, Turbidity is 2.10 NTU.",
-    "rec": "Dual-stage filtration recommended for high-mineral borewell sources."
+    "status": "Peak TDS 523.0 mg/L",
+    "color": "amber",
+    "obs": "Tested across 10 certified sites. Average TDS is 443.0 mg/L (max 523.0), pH is 7.55, Turbidity is 2.1 NTU.",
+    "rec": "Dual-stage filtration or RO recommended for high TDS borewell points."
   },
   {
     "id": 9,
     "name": "Ganesh Nagar",
     "ward": "Ward 9",
-    "x": 358,
-    "y": 79,
-    "lat": 19.8146,
-    "lon": 72.7516,
+    "x": 509.1,
+    "y": 125.7,
+    "lat": 19.8145,
+    "lon": 72.7515,
     "samples": 10,
     "sources": "Municipal Tap, Borewell, Well, Community Tap",
     "tds": {
@@ -359,19 +359,19 @@ const AreaMap = {
       "avg": 833.7,
       "max": 1034.0
     },
-    "status": "Borderline TDS Peak (508 mg/L)",
+    "status": "Peak TDS 508.0 mg/L",
     "color": "amber",
-    "obs": "Tested across 10 certified sites. Average TDS is 423.8 mg/L (max 508), pH is 7.56, Turbidity is 2.00 NTU.",
-    "rec": "Dual-stage filtration recommended for high-mineral borewell sources."
+    "obs": "Tested across 10 certified sites. Average TDS is 423.8 mg/L (max 508.0), pH is 7.56, Turbidity is 2.0 NTU.",
+    "rec": "Dual-stage filtration or RO recommended for high TDS borewell points."
   },
   {
     "id": 10,
     "name": "Yadav Nagar",
     "ward": "Ward 10",
-    "x": 567,
-    "y": 195,
-    "lat": 19.8046,
-    "lon": 72.7586,
+    "x": 689.9,
+    "y": 238.4,
+    "lat": 19.8045,
+    "lon": 72.7585,
     "samples": 10,
     "sources": "Municipal Tap, Borewell, Well, Community Tap",
     "tds": {
@@ -400,18 +400,18 @@ const AreaMap = {
       "max": 1007.0
     },
     "status": "Good Drinking Quality",
-    "color": "emerald",
-    "obs": "Tested across 10 certified sites. Average TDS is 413.1 mg/L (max 496), pH is 7.57, Turbidity is 1.98 NTU.",
+    "color": "cyan",
+    "obs": "Tested across 10 certified sites. Average TDS is 413.1 mg/L (max 496.0), pH is 7.57, Turbidity is 1.98 NTU.",
     "rec": "Routine boiling or candle filtration recommended."
   },
   {
     "id": 11,
     "name": "Azad Nagar",
     "ward": "Ward 11",
-    "x": 284,
-    "y": 375,
-    "lat": 19.7891,
-    "lon": 72.7491,
+    "x": 444.6,
+    "y": 413.0,
+    "lat": 19.789,
+    "lon": 72.749,
     "samples": 10,
     "sources": "Municipal Tap, Borewell, Well, Community Tap",
     "tds": {
@@ -439,10 +439,10 @@ const AreaMap = {
       "avg": 811.8,
       "max": 1040.0
     },
-    "status": "Borderline TDS Peak (509 mg/L)",
+    "status": "Peak TDS 509.0 mg/L",
     "color": "amber",
-    "obs": "Tested across 10 certified sites. Average TDS is 411.6 mg/L (max 509), pH is 7.57, Turbidity is 1.93 NTU.",
-    "rec": "Dual-stage filtration recommended for high-mineral borewell sources."
+    "obs": "Tested across 10 certified sites. Average TDS is 411.6 mg/L (max 509.0), pH is 7.57, Turbidity is 1.93 NTU.",
+    "rec": "Dual-stage filtration or RO recommended for high TDS borewell points."
   }
 ],
   samples: [
@@ -457,10 +457,10 @@ const AreaMap = {
     "turb": 1.12,
     "hard": 168.0,
     "ec": 684.0,
-    "lat": 19.801324,
-    "lon": 72.760214,
-    "x": 616,
-    "y": 233
+    "lat": 19.804566,
+    "lon": 72.753556,
+    "x": 586.2,
+    "y": 237.6
   },
   {
     "id": "JLC-01-002",
@@ -473,42 +473,42 @@ const AreaMap = {
     "turb": 1.76,
     "hard": 192.0,
     "ec": 752.0,
-    "lat": 19.801721,
-    "lon": 72.760841,
-    "x": 635,
-    "y": 228
+    "lat": 19.804566,
+    "lon": 72.753556,
+    "x": 576.8,
+    "y": 248.2
   },
   {
     "id": "JLC-01-003",
     "area": "Shivaji Nagar",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-07",
     "tds": 401.0,
     "ph": 7.62,
     "turb": 2.14,
     "hard": 205.0,
     "ec": 811.0,
-    "lat": 19.801143,
-    "lon": 72.760392,
-    "x": 622,
-    "y": 235
+    "lat": 19.804566,
+    "lon": 72.753556,
+    "x": 569.6,
+    "y": 260.4
   },
   {
     "id": "JLC-01-004",
     "area": "Shivaji Nagar",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-09",
     "tds": 356.0,
     "ph": 7.44,
     "turb": 0.91,
     "hard": 176.0,
     "ec": 701.0,
-    "lat": 19.802031,
-    "lon": 72.760673,
-    "x": 630,
-    "y": 225
+    "lat": 19.804566,
+    "lon": 72.753556,
+    "x": 556.6,
+    "y": 254.7
   },
   {
     "id": "JLC-01-005",
@@ -521,10 +521,10 @@ const AreaMap = {
     "turb": 1.43,
     "hard": 198.0,
     "ec": 778.0,
-    "lat": 19.801562,
-    "lon": 72.759981,
-    "x": 609,
-    "y": 230
+    "lat": 19.804566,
+    "lon": 72.753556,
+    "x": 542.8,
+    "y": 251.7
   },
   {
     "id": "JLC-01-006",
@@ -537,42 +537,42 @@ const AreaMap = {
     "turb": 2.36,
     "hard": 218.0,
     "ec": 836.0,
-    "lat": 19.801894,
-    "lon": 72.760517,
-    "x": 626,
-    "y": 226
+    "lat": 19.804566,
+    "lon": 72.753556,
+    "x": 544.2,
+    "y": 237.6
   },
   {
     "id": "JLC-01-007",
     "area": "Shivaji Nagar",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-15",
     "tds": 365.0,
     "ph": 7.69,
     "turb": 1.08,
     "hard": 171.0,
     "ec": 723.0,
-    "lat": 19.800982,
-    "lon": 72.761102,
-    "x": 643,
-    "y": 237
+    "lat": 19.804566,
+    "lon": 72.753556,
+    "x": 542.8,
+    "y": 223.5
   },
   {
     "id": "JLC-01-008",
     "area": "Shivaji Nagar",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-17",
     "tds": 397.0,
     "ph": 7.52,
     "turb": 1.67,
     "hard": 187.0,
     "ec": 789.0,
-    "lat": 19.801447,
-    "lon": 72.760334,
-    "x": 620,
-    "y": 232
+    "lat": 19.804566,
+    "lon": 72.753556,
+    "x": 556.6,
+    "y": 220.5
   },
   {
     "id": "JLC-01-009",
@@ -585,10 +585,10 @@ const AreaMap = {
     "turb": 2.71,
     "hard": 226.0,
     "ec": 861.0,
-    "lat": 19.802115,
-    "lon": 72.760756,
-    "x": 633,
-    "y": 224
+    "lat": 19.804566,
+    "lon": 72.753556,
+    "x": 569.6,
+    "y": 214.8
   },
   {
     "id": "JLC-01-010",
@@ -601,10 +601,10 @@ const AreaMap = {
     "turb": 1.55,
     "hard": 184.0,
     "ec": 741.0,
-    "lat": 19.801678,
-    "lon": 72.759852,
-    "x": 606,
-    "y": 229
+    "lat": 19.804566,
+    "lon": 72.753556,
+    "x": 576.8,
+    "y": 227.0
   },
   {
     "id": "JLC-02-001",
@@ -617,10 +617,10 @@ const AreaMap = {
     "turb": 1.03,
     "hard": 176.0,
     "ec": 718.0,
-    "lat": 19.807421,
-    "lon": 72.752781,
-    "x": 393,
-    "y": 162
+    "lat": 19.79597,
+    "lon": 72.73759,
+    "x": 173.8,
+    "y": 334.5
   },
   {
     "id": "JLC-02-002",
@@ -633,42 +633,42 @@ const AreaMap = {
     "turb": 1.82,
     "hard": 201.0,
     "ec": 805.0,
-    "lat": 19.807843,
-    "lon": 72.753214,
-    "x": 406,
-    "y": 158
+    "lat": 19.79597,
+    "lon": 72.73759,
+    "x": 164.4,
+    "y": 345.1
   },
   {
     "id": "JLC-02-003",
     "area": "Salwad",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-27",
     "tds": 439.0,
     "ph": 7.66,
     "turb": 2.37,
     "hard": 219.0,
     "ec": 867.0,
-    "lat": 19.807162,
-    "lon": 72.753491,
-    "x": 415,
-    "y": 165
+    "lat": 19.79597,
+    "lon": 72.73759,
+    "x": 157.2,
+    "y": 357.3
   },
   {
     "id": "JLC-02-004",
     "area": "Salwad",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-29",
     "tds": 382.0,
     "ph": 7.47,
     "turb": 1.21,
     "hard": 188.0,
     "ec": 756.0,
-    "lat": 19.808021,
-    "lon": 72.752913,
-    "x": 397,
-    "y": 156
+    "lat": 19.79597,
+    "lon": 72.73759,
+    "x": 144.2,
+    "y": 351.6
   },
   {
     "id": "JLC-02-005",
@@ -681,10 +681,10 @@ const AreaMap = {
     "turb": 1.64,
     "hard": 196.0,
     "ec": 789.0,
-    "lat": 19.807533,
-    "lon": 72.753084,
-    "x": 403,
-    "y": 161
+    "lat": 19.79597,
+    "lon": 72.73759,
+    "x": 130.4,
+    "y": 348.6
   },
   {
     "id": "JLC-02-006",
@@ -697,42 +697,42 @@ const AreaMap = {
     "turb": 2.88,
     "hard": 232.0,
     "ec": 914.0,
-    "lat": 19.806921,
-    "lon": 72.752672,
-    "x": 390,
-    "y": 168
+    "lat": 19.79597,
+    "lon": 72.73759,
+    "x": 131.8,
+    "y": 334.5
   },
   {
     "id": "JLC-02-007",
     "area": "Salwad",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-08-04",
     "tds": 397.0,
     "ph": 7.71,
     "turb": 1.46,
     "hard": 207.0,
     "ec": 821.0,
-    "lat": 19.807692,
-    "lon": 72.753366,
-    "x": 411,
-    "y": 159
+    "lat": 19.79597,
+    "lon": 72.73759,
+    "x": 130.4,
+    "y": 320.4
   },
   {
     "id": "JLC-02-008",
     "area": "Salwad",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-08-06",
     "tds": 421.0,
     "ph": 7.54,
     "turb": 2.02,
     "hard": 214.0,
     "ec": 846.0,
-    "lat": 19.808174,
-    "lon": 72.752584,
-    "x": 388,
-    "y": 154
+    "lat": 19.79597,
+    "lon": 72.73759,
+    "x": 144.2,
+    "y": 317.4
   },
   {
     "id": "JLC-02-009",
@@ -745,10 +745,10 @@ const AreaMap = {
     "turb": 3.14,
     "hard": 245.0,
     "ec": 936.0,
-    "lat": 19.806784,
-    "lon": 72.753018,
-    "x": 401,
-    "y": 170
+    "lat": 19.79597,
+    "lon": 72.73759,
+    "x": 157.2,
+    "y": 311.7
   },
   {
     "id": "JLC-02-010",
@@ -761,10 +761,10 @@ const AreaMap = {
     "turb": 1.69,
     "hard": 190.0,
     "ec": 771.0,
-    "lat": 19.807348,
-    "lon": 72.752741,
-    "x": 392,
-    "y": 163
+    "lat": 19.79597,
+    "lon": 72.73759,
+    "x": 164.4,
+    "y": 323.9
   },
   {
     "id": "JLC-03-001",
@@ -777,10 +777,10 @@ const AreaMap = {
     "turb": 1.47,
     "hard": 195.0,
     "ec": 781.0,
-    "lat": 19.812721,
-    "lon": 72.758632,
-    "x": 569,
-    "y": 101
+    "lat": 19.81585,
+    "lon": 72.73719,
+    "x": 163.5,
+    "y": 110.5
   },
   {
     "id": "JLC-03-002",
@@ -793,42 +793,42 @@ const AreaMap = {
     "turb": 2.16,
     "hard": 218.0,
     "ec": 856.0,
-    "lat": 19.813214,
-    "lon": 72.759187,
-    "x": 586,
-    "y": 95
+    "lat": 19.81585,
+    "lon": 72.73719,
+    "x": 154.1,
+    "y": 121.1
   },
   {
     "id": "JLC-03-003",
     "area": "Katkar",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-08",
     "tds": 468.0,
     "ph": 7.61,
     "turb": 2.73,
     "hard": 236.0,
     "ec": 923.0,
-    "lat": 19.812863,
-    "lon": 72.759421,
-    "x": 593,
-    "y": 99
+    "lat": 19.81585,
+    "lon": 72.73719,
+    "x": 146.9,
+    "y": 133.3
   },
   {
     "id": "JLC-03-004",
     "area": "Katkar",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-10",
     "tds": 415.0,
     "ph": 7.52,
     "turb": 1.24,
     "hard": 207.0,
     "ec": 824.0,
-    "lat": 19.813542,
-    "lon": 72.758774,
-    "x": 573,
-    "y": 92
+    "lat": 19.81585,
+    "lon": 72.73719,
+    "x": 133.9,
+    "y": 127.6
   },
   {
     "id": "JLC-03-005",
@@ -841,10 +841,10 @@ const AreaMap = {
     "turb": 1.91,
     "hard": 228.0,
     "ec": 889.0,
-    "lat": 19.812486,
-    "lon": 72.759052,
-    "x": 582,
-    "y": 104
+    "lat": 19.81585,
+    "lon": 72.73719,
+    "x": 120.1,
+    "y": 124.6
   },
   {
     "id": "JLC-03-006",
@@ -857,42 +857,42 @@ const AreaMap = {
     "turb": 3.21,
     "hard": 251.0,
     "ec": 976.0,
-    "lat": 19.813071,
-    "lon": 72.759633,
-    "x": 599,
-    "y": 97
+    "lat": 19.81585,
+    "lon": 72.73719,
+    "x": 121.5,
+    "y": 110.5
   },
   {
     "id": "JLC-03-007",
     "area": "Katkar",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-16",
     "tds": 421.0,
     "ph": 7.73,
     "turb": 1.68,
     "hard": 216.0,
     "ec": 838.0,
-    "lat": 19.812658,
-    "lon": 72.758941,
-    "x": 578,
-    "y": 102
+    "lat": 19.81585,
+    "lon": 72.73719,
+    "x": 120.1,
+    "y": 96.4
   },
   {
     "id": "JLC-03-008",
     "area": "Katkar",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-18",
     "tds": 456.0,
     "ph": 7.57,
     "turb": 2.42,
     "hard": 239.0,
     "ec": 914.0,
-    "lat": 19.813387,
-    "lon": 72.759284,
-    "x": 589,
-    "y": 93
+    "lat": 19.81585,
+    "lon": 72.73719,
+    "x": 133.9,
+    "y": 93.4
   },
   {
     "id": "JLC-03-009",
@@ -905,10 +905,10 @@ const AreaMap = {
     "turb": 3.47,
     "hard": 268.0,
     "ec": 1012.0,
-    "lat": 19.812934,
-    "lon": 72.758521,
-    "x": 566,
-    "y": 99
+    "lat": 19.81585,
+    "lon": 72.73719,
+    "x": 146.9,
+    "y": 87.7
   },
   {
     "id": "JLC-03-010",
@@ -921,10 +921,10 @@ const AreaMap = {
     "turb": 2.05,
     "hard": 223.0,
     "ec": 872.0,
-    "lat": 19.813682,
-    "lon": 72.759114,
-    "x": 583,
-    "y": 90
+    "lat": 19.81585,
+    "lon": 72.73719,
+    "x": 154.1,
+    "y": 99.9
   },
   {
     "id": "JLC-04-001",
@@ -939,8 +939,8 @@ const AreaMap = {
     "ec": 699.0,
     "lat": 19.796214,
     "lon": 72.754173,
-    "x": 435,
-    "y": 292
+    "x": 602.2,
+    "y": 331.8
   },
   {
     "id": "JLC-04-002",
@@ -953,42 +953,42 @@ const AreaMap = {
     "turb": 1.63,
     "hard": 189.0,
     "ec": 758.0,
-    "lat": 19.796741,
-    "lon": 72.754628,
-    "x": 449,
-    "y": 286
+    "lat": 19.796214,
+    "lon": 72.754173,
+    "x": 592.8,
+    "y": 342.4
   },
   {
     "id": "JLC-04-003",
     "area": "Mahavir Nagar",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-09",
     "tds": 417.0,
     "ph": 7.68,
     "turb": 2.14,
     "hard": 207.0,
     "ec": 817.0,
-    "lat": 19.796392,
-    "lon": 72.754911,
-    "x": 457,
-    "y": 290
+    "lat": 19.796214,
+    "lon": 72.754173,
+    "x": 585.6,
+    "y": 354.6
   },
   {
     "id": "JLC-04-004",
     "area": "Mahavir Nagar",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-11",
     "tds": 364.0,
     "ph": 7.52,
     "turb": 0.86,
     "hard": 176.0,
     "ec": 713.0,
-    "lat": 19.797024,
-    "lon": 72.754382,
-    "x": 441,
-    "y": 283
+    "lat": 19.796214,
+    "lon": 72.754173,
+    "x": 572.6,
+    "y": 348.9
   },
   {
     "id": "JLC-04-005",
@@ -1001,10 +1001,10 @@ const AreaMap = {
     "turb": 1.41,
     "hard": 194.0,
     "ec": 776.0,
-    "lat": 19.796581,
-    "lon": 72.754741,
-    "x": 452,
-    "y": 288
+    "lat": 19.796214,
+    "lon": 72.754173,
+    "x": 558.8,
+    "y": 345.9
   },
   {
     "id": "JLC-04-006",
@@ -1017,42 +1017,42 @@ const AreaMap = {
     "turb": 2.67,
     "hard": 221.0,
     "ec": 861.0,
-    "lat": 19.796873,
-    "lon": 72.753984,
-    "x": 430,
-    "y": 285
+    "lat": 19.796214,
+    "lon": 72.754173,
+    "x": 560.2,
+    "y": 331.8
   },
   {
     "id": "JLC-04-007",
     "area": "Mahavir Nagar",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-17",
     "tds": 407.0,
     "ph": 7.76,
     "turb": 1.55,
     "hard": 203.0,
     "ec": 798.0,
-    "lat": 19.795961,
-    "lon": 72.754519,
-    "x": 446,
-    "y": 295
+    "lat": 19.796214,
+    "lon": 72.754173,
+    "x": 558.8,
+    "y": 317.7
   },
   {
     "id": "JLC-04-008",
     "area": "Mahavir Nagar",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-19",
     "tds": 376.0,
     "ph": 7.58,
     "turb": 1.19,
     "hard": 182.0,
     "ec": 734.0,
-    "lat": 19.796827,
-    "lon": 72.754862,
-    "x": 456,
-    "y": 285
+    "lat": 19.796214,
+    "lon": 72.754173,
+    "x": 572.6,
+    "y": 314.7
   },
   {
     "id": "JLC-04-009",
@@ -1065,10 +1065,10 @@ const AreaMap = {
     "turb": 2.98,
     "hard": 237.0,
     "ec": 906.0,
-    "lat": 19.796144,
-    "lon": 72.753892,
-    "x": 427,
-    "y": 293
+    "lat": 19.796214,
+    "lon": 72.754173,
+    "x": 585.6,
+    "y": 309.0
   },
   {
     "id": "JLC-04-010",
@@ -1081,10 +1081,10 @@ const AreaMap = {
     "turb": 1.84,
     "hard": 198.0,
     "ec": 765.0,
-    "lat": 19.796532,
-    "lon": 72.754295,
-    "x": 439,
-    "y": 289
+    "lat": 19.796214,
+    "lon": 72.754173,
+    "x": 592.8,
+    "y": 321.2
   },
   {
     "id": "JLC-05-001",
@@ -1099,8 +1099,8 @@ const AreaMap = {
     "ec": 752.0,
     "lat": 19.789214,
     "lon": 72.761231,
-    "x": 647,
-    "y": 373
+    "x": 784.5,
+    "y": 410.6
   },
   {
     "id": "JLC-05-002",
@@ -1113,42 +1113,42 @@ const AreaMap = {
     "turb": 2.04,
     "hard": 216.0,
     "ec": 827.0,
-    "lat": 19.789742,
-    "lon": 72.761684,
-    "x": 661,
-    "y": 367
+    "lat": 19.789214,
+    "lon": 72.761231,
+    "x": 775.1,
+    "y": 421.2
   },
   {
     "id": "JLC-05-003",
     "area": "Bhandarwada",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-10",
     "tds": 452.0,
     "ph": 7.59,
     "turb": 2.81,
     "hard": 234.0,
     "ec": 891.0,
-    "lat": 19.789461,
-    "lon": 72.761917,
-    "x": 668,
-    "y": 370
+    "lat": 19.789214,
+    "lon": 72.761231,
+    "x": 767.9,
+    "y": 433.4
   },
   {
     "id": "JLC-05-004",
     "area": "Bhandarwada",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-12",
     "tds": 397.0,
     "ph": 7.48,
     "turb": 1.17,
     "hard": 201.0,
     "ec": 784.0,
-    "lat": 19.790021,
-    "lon": 72.761392,
-    "x": 652,
-    "y": 364
+    "lat": 19.789214,
+    "lon": 72.761231,
+    "x": 754.9,
+    "y": 427.7
   },
   {
     "id": "JLC-05-005",
@@ -1161,10 +1161,10 @@ const AreaMap = {
     "turb": 1.76,
     "hard": 223.0,
     "ec": 851.0,
-    "lat": 19.789573,
-    "lon": 72.761743,
-    "x": 662,
-    "y": 369
+    "lat": 19.789214,
+    "lon": 72.761231,
+    "x": 741.1,
+    "y": 424.7
   },
   {
     "id": "JLC-05-006",
@@ -1177,42 +1177,42 @@ const AreaMap = {
     "turb": 3.26,
     "hard": 249.0,
     "ec": 953.0,
-    "lat": 19.789861,
-    "lon": 72.760984,
-    "x": 640,
-    "y": 366
+    "lat": 19.789214,
+    "lon": 72.761231,
+    "x": 742.5,
+    "y": 410.6
   },
   {
     "id": "JLC-05-007",
     "area": "Bhandarwada",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-18",
     "tds": 414.0,
     "ph": 7.74,
     "turb": 2.13,
     "hard": 218.0,
     "ec": 815.0,
-    "lat": 19.788942,
-    "lon": 72.761521,
-    "x": 656,
-    "y": 376
+    "lat": 19.789214,
+    "lon": 72.761231,
+    "x": 741.1,
+    "y": 396.5
   },
   {
     "id": "JLC-05-008",
     "area": "Bhandarwada",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-20",
     "tds": 445.0,
     "ph": 7.55,
     "turb": 2.47,
     "hard": 231.0,
     "ec": 879.0,
-    "lat": 19.789812,
-    "lon": 72.761801,
-    "x": 664,
-    "y": 366
+    "lat": 19.789214,
+    "lon": 72.761231,
+    "x": 754.9,
+    "y": 393.5
   },
   {
     "id": "JLC-05-009",
@@ -1225,10 +1225,10 @@ const AreaMap = {
     "turb": 3.61,
     "hard": 267.0,
     "ec": 1004.0,
-    "lat": 19.789128,
-    "lon": 72.760912,
-    "x": 637,
-    "y": 374
+    "lat": 19.789214,
+    "lon": 72.761231,
+    "x": 767.9,
+    "y": 387.8
   },
   {
     "id": "JLC-05-010",
@@ -1241,10 +1241,10 @@ const AreaMap = {
     "turb": 1.92,
     "hard": 209.0,
     "ec": 836.0,
-    "lat": 19.789534,
-    "lon": 72.761274,
-    "x": 648,
-    "y": 370
+    "lat": 19.789214,
+    "lon": 72.761231,
+    "x": 775.1,
+    "y": 400.0
   },
   {
     "id": "JLC-06-001",
@@ -1259,8 +1259,8 @@ const AreaMap = {
     "ec": 641.0,
     "lat": 19.782214,
     "lon": 72.757741,
-    "x": 542,
-    "y": 454
+    "x": 694.3,
+    "y": 489.5
   },
   {
     "id": "JLC-06-002",
@@ -1273,42 +1273,42 @@ const AreaMap = {
     "turb": 1.28,
     "hard": 169.0,
     "ec": 688.0,
-    "lat": 19.782741,
-    "lon": 72.758214,
-    "x": 556,
-    "y": 448
+    "lat": 19.782214,
+    "lon": 72.757741,
+    "x": 684.9,
+    "y": 500.1
   },
   {
     "id": "JLC-06-003",
     "area": "Betegaon",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-11",
     "tds": 379.0,
     "ph": 7.72,
     "turb": 1.93,
     "hard": 181.0,
     "ec": 741.0,
-    "lat": 19.782462,
-    "lon": 72.758491,
-    "x": 565,
-    "y": 451
+    "lat": 19.782214,
+    "lon": 72.757741,
+    "x": 677.7,
+    "y": 512.3
   },
   {
     "id": "JLC-06-004",
     "area": "Betegaon",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-13",
     "tds": 338.0,
     "ph": 7.59,
     "turb": 0.74,
     "hard": 161.0,
     "ec": 663.0,
-    "lat": 19.783021,
-    "lon": 72.757882,
-    "x": 546,
-    "y": 445
+    "lat": 19.782214,
+    "lon": 72.757741,
+    "x": 664.7,
+    "y": 506.6
   },
   {
     "id": "JLC-06-005",
@@ -1321,10 +1321,10 @@ const AreaMap = {
     "turb": 1.17,
     "hard": 174.0,
     "ec": 716.0,
-    "lat": 19.782573,
-    "lon": 72.758263,
-    "x": 558,
-    "y": 450
+    "lat": 19.782214,
+    "lon": 72.757741,
+    "x": 650.9,
+    "y": 503.6
   },
   {
     "id": "JLC-06-006",
@@ -1337,42 +1337,42 @@ const AreaMap = {
     "turb": 2.31,
     "hard": 198.0,
     "ec": 789.0,
-    "lat": 19.782861,
-    "lon": 72.757504,
-    "x": 535,
-    "y": 447
+    "lat": 19.782214,
+    "lon": 72.757741,
+    "x": 652.3,
+    "y": 489.5
   },
   {
     "id": "JLC-06-007",
     "area": "Betegaon",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-19",
     "tds": 347.0,
     "ph": 7.79,
     "turb": 1.04,
     "hard": 166.0,
     "ec": 681.0,
-    "lat": 19.781942,
-    "lon": 72.758041,
-    "x": 551,
-    "y": 458
+    "lat": 19.782214,
+    "lon": 72.757741,
+    "x": 650.9,
+    "y": 475.4
   },
   {
     "id": "JLC-06-008",
     "area": "Betegaon",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-21",
     "tds": 372.0,
     "ph": 7.61,
     "turb": 1.52,
     "hard": 179.0,
     "ec": 729.0,
-    "lat": 19.782812,
-    "lon": 72.758324,
-    "x": 560,
-    "y": 447
+    "lat": 19.782214,
+    "lon": 72.757741,
+    "x": 664.7,
+    "y": 472.4
   },
   {
     "id": "JLC-06-009",
@@ -1385,10 +1385,10 @@ const AreaMap = {
     "turb": 2.67,
     "hard": 211.0,
     "ec": 823.0,
-    "lat": 19.782128,
-    "lon": 72.757412,
-    "x": 532,
-    "y": 455
+    "lat": 19.782214,
+    "lon": 72.757741,
+    "x": 677.7,
+    "y": 466.7
   },
   {
     "id": "JLC-06-010",
@@ -1401,10 +1401,10 @@ const AreaMap = {
     "turb": 1.36,
     "hard": 171.0,
     "ec": 702.0,
-    "lat": 19.782534,
-    "lon": 72.757974,
-    "x": 549,
-    "y": 451
+    "lat": 19.782214,
+    "lon": 72.757741,
+    "x": 684.9,
+    "y": 478.9
   },
   {
     "id": "JLC-07-001",
@@ -1419,8 +1419,8 @@ const AreaMap = {
     "ec": 692.0,
     "lat": 19.7918,
     "lon": 72.755,
-    "x": 460,
-    "y": 343
+    "x": 623.5,
+    "y": 381.5
   },
   {
     "id": "JLC-07-002",
@@ -1433,42 +1433,42 @@ const AreaMap = {
     "turb": 1.84,
     "hard": 201.0,
     "ec": 814.0,
-    "lat": 19.7924,
-    "lon": 72.7543,
-    "x": 439,
-    "y": 336
+    "lat": 19.7918,
+    "lon": 72.755,
+    "x": 614.1,
+    "y": 392.1
   },
   {
     "id": "JLC-07-003",
     "area": "Awadh Nagar",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-12",
     "tds": 389.0,
     "ph": 7.18,
     "turb": 2.11,
     "hard": 214.0,
     "ec": 756.0,
-    "lat": 19.7912,
-    "lon": 72.7558,
-    "x": 484,
-    "y": 350
+    "lat": 19.7918,
+    "lon": 72.755,
+    "x": 606.9,
+    "y": 404.3
   },
   {
     "id": "JLC-07-004",
     "area": "Awadh Nagar",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-14",
     "tds": 431.0,
     "ph": 7.76,
     "turb": 1.45,
     "hard": 188.0,
     "ec": 875.0,
-    "lat": 19.7926,
-    "lon": 72.7561,
-    "x": 493,
-    "y": 334
+    "lat": 19.7918,
+    "lon": 72.755,
+    "x": 593.9,
+    "y": 398.6
   },
   {
     "id": "JLC-07-005",
@@ -1481,10 +1481,10 @@ const AreaMap = {
     "turb": 0.92,
     "hard": 165.0,
     "ec": 704.0,
-    "lat": 19.7909,
-    "lon": 72.7547,
-    "x": 451,
-    "y": 354
+    "lat": 19.7918,
+    "lon": 72.755,
+    "x": 580.1,
+    "y": 395.6
   },
   {
     "id": "JLC-07-006",
@@ -1497,42 +1497,42 @@ const AreaMap = {
     "turb": 2.36,
     "hard": 229.0,
     "ec": 921.0,
-    "lat": 19.792,
-    "lon": 72.7539,
-    "x": 427,
-    "y": 341
+    "lat": 19.7918,
+    "lon": 72.755,
+    "x": 581.5,
+    "y": 381.5
   },
   {
     "id": "JLC-07-007",
     "area": "Awadh Nagar",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-20",
     "tds": 401.0,
     "ph": 7.27,
     "turb": 3.02,
     "hard": 217.0,
     "ec": 783.0,
-    "lat": 19.7915,
-    "lon": 72.7563,
-    "x": 499,
-    "y": 347
+    "lat": 19.7918,
+    "lon": 72.755,
+    "x": 580.1,
+    "y": 367.4
   },
   {
     "id": "JLC-07-008",
     "area": "Awadh Nagar",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-22",
     "tds": 338.0,
     "ph": 7.68,
     "turb": 1.08,
     "hard": 158.0,
     "ec": 651.0,
-    "lat": 19.793,
-    "lon": 72.7552,
-    "x": 466,
-    "y": 329
+    "lat": 19.7918,
+    "lon": 72.755,
+    "x": 593.9,
+    "y": 364.4
   },
   {
     "id": "JLC-07-009",
@@ -1545,10 +1545,10 @@ const AreaMap = {
     "turb": 1.67,
     "hard": 183.0,
     "ec": 729.0,
-    "lat": 19.7907,
-    "lon": 72.7541,
-    "x": 433,
-    "y": 356
+    "lat": 19.7918,
+    "lon": 72.755,
+    "x": 606.9,
+    "y": 358.7
   },
   {
     "id": "JLC-07-010",
@@ -1561,10 +1561,10 @@ const AreaMap = {
     "turb": 2.74,
     "hard": 241.0,
     "ec": 948.0,
-    "lat": 19.7923,
-    "lon": 72.7566,
-    "x": 508,
-    "y": 338
+    "lat": 19.7918,
+    "lon": 72.755,
+    "x": 614.1,
+    "y": 370.9
   },
   {
     "id": "JLC-08-001",
@@ -1579,8 +1579,8 @@ const AreaMap = {
     "ec": 822.0,
     "lat": 19.807,
     "lon": 72.7445,
-    "x": 145,
-    "y": 167
+    "x": 352.3,
+    "y": 210.2
   },
   {
     "id": "JLC-08-002",
@@ -1593,42 +1593,42 @@ const AreaMap = {
     "turb": 2.18,
     "hard": 225.0,
     "ec": 935.0,
-    "lat": 19.8064,
-    "lon": 72.7452,
-    "x": 166,
-    "y": 174
+    "lat": 19.807,
+    "lon": 72.7445,
+    "x": 342.9,
+    "y": 220.8
   },
   {
     "id": "JLC-08-003",
     "area": "Pam",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-13",
     "tds": 438.0,
     "ph": 7.12,
     "turb": 2.83,
     "hard": 237.0,
     "ec": 861.0,
-    "lat": 19.8076,
-    "lon": 72.7439,
-    "x": 127,
-    "y": 160
+    "lat": 19.807,
+    "lon": 72.7445,
+    "x": 335.7,
+    "y": 233.0
   },
   {
     "id": "JLC-08-004",
     "area": "Pam",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-15",
     "tds": 391.0,
     "ph": 7.74,
     "turb": 1.16,
     "hard": 184.0,
     "ec": 759.0,
-    "lat": 19.8081,
-    "lon": 72.7447,
-    "x": 151,
-    "y": 155
+    "lat": 19.807,
+    "lon": 72.7445,
+    "x": 322.7,
+    "y": 227.3
   },
   {
     "id": "JLC-08-005",
@@ -1641,10 +1641,10 @@ const AreaMap = {
     "turb": 1.95,
     "hard": 211.0,
     "ec": 884.0,
-    "lat": 19.8068,
-    "lon": 72.7438,
-    "x": 124,
-    "y": 170
+    "lat": 19.807,
+    "lon": 72.7445,
+    "x": 308.9,
+    "y": 224.3
   },
   {
     "id": "JLC-08-006",
@@ -1657,42 +1657,42 @@ const AreaMap = {
     "turb": 3.11,
     "hard": 254.0,
     "ec": 1017.0,
-    "lat": 19.8073,
-    "lon": 72.7456,
-    "x": 178,
-    "y": 164
+    "lat": 19.807,
+    "lon": 72.7445,
+    "x": 310.3,
+    "y": 210.2
   },
   {
     "id": "JLC-08-007",
     "area": "Pam",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-21",
     "tds": 414.0,
     "ph": 7.22,
     "turb": 2.47,
     "hard": 221.0,
     "ec": 797.0,
-    "lat": 19.8059,
-    "lon": 72.7441,
-    "x": 133,
-    "y": 180
+    "lat": 19.807,
+    "lon": 72.7445,
+    "x": 308.9,
+    "y": 196.1
   },
   {
     "id": "JLC-08-008",
     "area": "Pam",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-23",
     "tds": 369.0,
     "ph": 7.59,
     "turb": 0.88,
     "hard": 172.0,
     "ec": 712.0,
-    "lat": 19.8084,
-    "lon": 72.745,
-    "x": 160,
-    "y": 151
+    "lat": 19.807,
+    "lon": 72.7445,
+    "x": 322.7,
+    "y": 193.1
   },
   {
     "id": "JLC-08-009",
@@ -1705,10 +1705,10 @@ const AreaMap = {
     "turb": 1.71,
     "hard": 206.0,
     "ec": 856.0,
-    "lat": 19.8065,
-    "lon": 72.7436,
-    "x": 118,
-    "y": 173
+    "lat": 19.807,
+    "lon": 72.7445,
+    "x": 335.7,
+    "y": 187.4
   },
   {
     "id": "JLC-08-010",
@@ -1721,10 +1721,10 @@ const AreaMap = {
     "turb": 3.42,
     "hard": 267.0,
     "ec": 1061.0,
-    "lat": 19.8078,
-    "lon": 72.7458,
-    "x": 184,
-    "y": 158
+    "lat": 19.807,
+    "lon": 72.7445,
+    "x": 342.9,
+    "y": 199.6
   },
   {
     "id": "JLC-09-001",
@@ -1739,8 +1739,8 @@ const AreaMap = {
     "ec": 752.0,
     "lat": 19.8145,
     "lon": 72.7515,
-    "x": 355,
-    "y": 81
+    "x": 533.1,
+    "y": 125.7
   },
   {
     "id": "JLC-09-002",
@@ -1753,42 +1753,42 @@ const AreaMap = {
     "turb": 1.86,
     "hard": 207.0,
     "ec": 841.0,
-    "lat": 19.8152,
-    "lon": 72.7509,
-    "x": 337,
-    "y": 72
+    "lat": 19.8145,
+    "lon": 72.7515,
+    "x": 523.7,
+    "y": 136.3
   },
   {
     "id": "JLC-09-003",
     "area": "Ganesh Nagar",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-14",
     "tds": 463.0,
     "ph": 7.21,
     "turb": 2.64,
     "hard": 231.0,
     "ec": 903.0,
-    "lat": 19.8138,
-    "lon": 72.7521,
-    "x": 373,
-    "y": 89
+    "lat": 19.8145,
+    "lon": 72.7515,
+    "x": 516.5,
+    "y": 148.5
   },
   {
     "id": "JLC-09-004",
     "area": "Ganesh Nagar",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-16",
     "tds": 351.0,
     "ph": 7.69,
     "turb": 1.24,
     "hard": 169.0,
     "ec": 682.0,
-    "lat": 19.8149,
-    "lon": 72.7524,
-    "x": 382,
-    "y": 76
+    "lat": 19.8145,
+    "lon": 72.7515,
+    "x": 503.5,
+    "y": 142.8
   },
   {
     "id": "JLC-09-005",
@@ -1801,10 +1801,10 @@ const AreaMap = {
     "turb": 1.58,
     "hard": 192.0,
     "ec": 789.0,
-    "lat": 19.8137,
-    "lon": 72.7507,
-    "x": 331,
-    "y": 90
+    "lat": 19.8145,
+    "lon": 72.7515,
+    "x": 489.7,
+    "y": 139.8
   },
   {
     "id": "JLC-09-006",
@@ -1817,42 +1817,42 @@ const AreaMap = {
     "turb": 2.91,
     "hard": 248.0,
     "ec": 976.0,
-    "lat": 19.8155,
-    "lon": 72.7517,
-    "x": 361,
-    "y": 69
+    "lat": 19.8145,
+    "lon": 72.7515,
+    "x": 491.1,
+    "y": 125.7
   },
   {
     "id": "JLC-09-007",
     "area": "Ganesh Nagar",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-22",
     "tds": 447.0,
     "ph": 7.16,
     "turb": 3.27,
     "hard": 239.0,
     "ec": 871.0,
-    "lat": 19.8141,
-    "lon": 72.7508,
-    "x": 334,
-    "y": 85
+    "lat": 19.8145,
+    "lon": 72.7515,
+    "x": 489.7,
+    "y": 111.6
   },
   {
     "id": "JLC-09-008",
     "area": "Ganesh Nagar",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-24",
     "tds": 373.0,
     "ph": 7.58,
     "turb": 0.76,
     "hard": 175.0,
     "ec": 721.0,
-    "lat": 19.815,
-    "lon": 72.7528,
-    "x": 394,
-    "y": 75
+    "lat": 19.8145,
+    "lon": 72.7515,
+    "x": 503.5,
+    "y": 108.6
   },
   {
     "id": "JLC-09-009",
@@ -1865,10 +1865,10 @@ const AreaMap = {
     "turb": 1.43,
     "hard": 187.0,
     "ec": 768.0,
-    "lat": 19.8135,
-    "lon": 72.7512,
-    "x": 346,
-    "y": 92
+    "lat": 19.8145,
+    "lon": 72.7515,
+    "x": 516.5,
+    "y": 102.9
   },
   {
     "id": "JLC-09-010",
@@ -1881,10 +1881,10 @@ const AreaMap = {
     "turb": 3.18,
     "hard": 260.0,
     "ec": 1034.0,
-    "lat": 19.8157,
-    "lon": 72.752,
-    "x": 370,
-    "y": 67
+    "lat": 19.8145,
+    "lon": 72.7515,
+    "x": 523.7,
+    "y": 115.1
   },
   {
     "id": "JLC-10-001",
@@ -1899,8 +1899,8 @@ const AreaMap = {
     "ec": 724.0,
     "lat": 19.8045,
     "lon": 72.7585,
-    "x": 565,
-    "y": 196
+    "x": 713.9,
+    "y": 238.4
   },
   {
     "id": "JLC-10-002",
@@ -1913,42 +1913,42 @@ const AreaMap = {
     "turb": 2.01,
     "hard": 203.0,
     "ec": 823.0,
-    "lat": 19.8052,
-    "lon": 72.7578,
-    "x": 544,
-    "y": 188
+    "lat": 19.8045,
+    "lon": 72.7585,
+    "x": 704.5,
+    "y": 249.0
   },
   {
     "id": "JLC-10-003",
     "area": "Yadav Nagar",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-15",
     "tds": 455.0,
     "ph": 7.25,
     "turb": 2.72,
     "hard": 226.0,
     "ec": 895.0,
-    "lat": 19.8038,
-    "lon": 72.7591,
-    "x": 583,
-    "y": 204
+    "lat": 19.8045,
+    "lon": 72.7585,
+    "x": 697.3,
+    "y": 261.2
   },
   {
     "id": "JLC-10-004",
     "area": "Yadav Nagar",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-17",
     "tds": 342.0,
     "ph": 7.71,
     "turb": 0.98,
     "hard": 162.0,
     "ec": 665.0,
-    "lat": 19.8049,
-    "lon": 72.7594,
-    "x": 592,
-    "y": 192
+    "lat": 19.8045,
+    "lon": 72.7585,
+    "x": 684.3,
+    "y": 255.5
   },
   {
     "id": "JLC-10-005",
@@ -1961,10 +1961,10 @@ const AreaMap = {
     "turb": 1.51,
     "hard": 190.0,
     "ec": 774.0,
-    "lat": 19.8037,
-    "lon": 72.7577,
-    "x": 541,
-    "y": 206
+    "lat": 19.8045,
+    "lon": 72.7585,
+    "x": 670.5,
+    "y": 252.5
   },
   {
     "id": "JLC-10-006",
@@ -1977,42 +1977,42 @@ const AreaMap = {
     "turb": 2.88,
     "hard": 242.0,
     "ec": 954.0,
-    "lat": 19.8055,
-    "lon": 72.7587,
-    "x": 571,
-    "y": 185
+    "lat": 19.8045,
+    "lon": 72.7585,
+    "x": 671.9,
+    "y": 238.4
   },
   {
     "id": "JLC-10-007",
     "area": "Yadav Nagar",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-23",
     "tds": 433.0,
     "ph": 7.19,
     "turb": 3.05,
     "hard": 218.0,
     "ec": 846.0,
-    "lat": 19.8041,
-    "lon": 72.7576,
-    "x": 538,
-    "y": 201
+    "lat": 19.8045,
+    "lon": 72.7585,
+    "x": 670.5,
+    "y": 224.3
   },
   {
     "id": "JLC-10-008",
     "area": "Yadav Nagar",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-25",
     "tds": 359.0,
     "ph": 7.63,
     "turb": 0.82,
     "hard": 171.0,
     "ec": 694.0,
-    "lat": 19.805,
-    "lon": 72.7598,
-    "x": 604,
-    "y": 191
+    "lat": 19.8045,
+    "lon": 72.7585,
+    "x": 684.3,
+    "y": 221.3
   },
   {
     "id": "JLC-10-009",
@@ -2025,10 +2025,10 @@ const AreaMap = {
     "turb": 1.38,
     "hard": 185.0,
     "ec": 755.0,
-    "lat": 19.8035,
-    "lon": 72.7582,
-    "x": 556,
-    "y": 208
+    "lat": 19.8045,
+    "lon": 72.7585,
+    "x": 697.3,
+    "y": 215.6
   },
   {
     "id": "JLC-10-010",
@@ -2041,10 +2041,10 @@ const AreaMap = {
     "turb": 3.36,
     "hard": 255.0,
     "ec": 1007.0,
-    "lat": 19.8057,
-    "lon": 72.759,
-    "x": 580,
-    "y": 182
+    "lat": 19.8045,
+    "lon": 72.7585,
+    "x": 704.5,
+    "y": 227.8
   },
   {
     "id": "JLC-11-001",
@@ -2059,8 +2059,8 @@ const AreaMap = {
     "ec": 711.0,
     "lat": 19.789,
     "lon": 72.749,
-    "x": 280,
-    "y": 376
+    "x": 468.6,
+    "y": 413.0
   },
   {
     "id": "JLC-11-002",
@@ -2073,42 +2073,42 @@ const AreaMap = {
     "turb": 1.92,
     "hard": 209.0,
     "ec": 831.0,
-    "lat": 19.7897,
-    "lon": 72.7483,
-    "x": 259,
-    "y": 368
+    "lat": 19.789,
+    "lon": 72.749,
+    "x": 459.2,
+    "y": 423.6
   },
   {
     "id": "JLC-11-003",
     "area": "Azad Nagar",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-16",
     "tds": 451.0,
     "ph": 7.15,
     "turb": 2.55,
     "hard": 228.0,
     "ec": 884.0,
-    "lat": 19.7883,
-    "lon": 72.7496,
-    "x": 298,
-    "y": 384
+    "lat": 19.789,
+    "lon": 72.749,
+    "x": 452.0,
+    "y": 435.8
   },
   {
     "id": "JLC-11-004",
     "area": "Azad Nagar",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-18",
     "tds": 337.0,
     "ph": 7.72,
     "turb": 0.91,
     "hard": 160.0,
     "ec": 653.0,
-    "lat": 19.7894,
-    "lon": 72.7499,
-    "x": 307,
-    "y": 371
+    "lat": 19.789,
+    "lon": 72.749,
+    "x": 439.0,
+    "y": 430.1
   },
   {
     "id": "JLC-11-005",
@@ -2121,10 +2121,10 @@ const AreaMap = {
     "turb": 1.47,
     "hard": 186.0,
     "ec": 768.0,
-    "lat": 19.7882,
-    "lon": 72.7482,
-    "x": 256,
-    "y": 385
+    "lat": 19.789,
+    "lon": 72.749,
+    "x": 425.2,
+    "y": 427.1
   },
   {
     "id": "JLC-11-006",
@@ -2137,42 +2137,42 @@ const AreaMap = {
     "turb": 2.79,
     "hard": 246.0,
     "ec": 973.0,
-    "lat": 19.79,
-    "lon": 72.7492,
-    "x": 286,
-    "y": 364
+    "lat": 19.789,
+    "lon": 72.749,
+    "x": 426.6,
+    "y": 413.0
   },
   {
     "id": "JLC-11-007",
     "area": "Azad Nagar",
     "source": "Well",
-    "icon": "\ud83e\udea3",
+    "icon": "\ud83c\udffa",
     "date": "2026-07-24",
     "tds": 427.0,
     "ph": 7.23,
     "turb": 3.14,
     "hard": 216.0,
     "ec": 832.0,
-    "lat": 19.7886,
-    "lon": 72.7481,
-    "x": 253,
-    "y": 380
+    "lat": 19.789,
+    "lon": 72.749,
+    "x": 425.2,
+    "y": 398.9
   },
   {
     "id": "JLC-11-008",
     "area": "Azad Nagar",
     "source": "Community Tap",
-    "icon": "\ud83d\udca7",
+    "icon": "\ud83d\udeb0",
     "date": "2026-07-26",
     "tds": 354.0,
     "ph": 7.61,
     "turb": 0.73,
     "hard": 168.0,
     "ec": 684.0,
-    "lat": 19.7895,
-    "lon": 72.7503,
-    "x": 319,
-    "y": 370
+    "lat": 19.789,
+    "lon": 72.749,
+    "x": 439.0,
+    "y": 395.9
   },
   {
     "id": "JLC-11-009",
@@ -2185,10 +2185,10 @@ const AreaMap = {
     "turb": 1.35,
     "hard": 179.0,
     "ec": 742.0,
-    "lat": 19.788,
-    "lon": 72.7488,
-    "x": 274,
-    "y": 387
+    "lat": 19.789,
+    "lon": 72.749,
+    "x": 452.0,
+    "y": 390.2
   },
   {
     "id": "JLC-11-010",
@@ -2201,10 +2201,10 @@ const AreaMap = {
     "turb": 3.29,
     "hard": 258.0,
     "ec": 1040.0,
-    "lat": 19.7902,
-    "lon": 72.7498,
-    "x": 304,
-    "y": 362
+    "lat": 19.789,
+    "lon": 72.749,
+    "x": 459.2,
+    "y": 402.4
   }
 ],
   selectedAreaIndex: 0,
@@ -2232,7 +2232,7 @@ const AreaMap = {
     if (this.viewMode === 'areas') {
       this.areas.forEach((a, i) => {
         const isSelected = (i === this.selectedAreaIndex);
-        const pinColor = a.color === 'emerald' ? '#10b981' : (a.color === 'amber' ? '#f59e0b' : '#f43f5e');
+        const pinColor = a.color === 'emerald' ? '#10b981' : (a.color === 'amber' ? '#f59e0b' : '#38bdf8');
         pinsHtml += `
           <g class="map-pin cursor-pointer" onclick="AreaMap.selectArea(${i})">
             <circle cx="${a.x}" cy="${a.y}" r="${isSelected ? 24 : 18}" fill="${pinColor}" opacity="${isSelected ? 0.35 : 0.2}"/>
@@ -2249,7 +2249,7 @@ const AreaMap = {
         pinsHtml += `
           <g class="map-pin cursor-pointer group" onclick="AreaMap.inspectSample('${s.id}')">
             <circle cx="${s.x}" cy="${s.y}" r="7" fill="${pinColor}" stroke="#ffffff" stroke-width="1.5"/>
-            <title>${s.id} - ${s.area} (${s.source})\nTDS: ${s.tds} mg/L, pH: ${s.ph}, Turb: ${s.turb} NTU</title>
+            <title>${s.id} - ${s.area} (${s.source})\nTDS: ${s.tds} mg/L, pH: ${s.ph}, Turb: ${s.turb} NTU\nCoords: ${s.lat}, ${s.lon}</title>
           </g>
         `;
       });
@@ -2272,7 +2272,7 @@ const AreaMap = {
     if (nameEl) nameEl.textContent = a.name;
 
     const srcEl = document.getElementById('map-card-source');
-    if (srcEl) srcEl.textContent = `Sources: ${a.sources}`;
+    if (srcEl) srcEl.textContent = `Sources: ${a.sources} | GPS: ${a.lat.toFixed(6)}°N, ${a.lon.toFixed(6)}°E`;
 
     const tag = document.getElementById('map-card-status');
     if (tag) {
@@ -2282,7 +2282,7 @@ const AreaMap = {
       } else if (a.color === 'amber') {
         tag.className = 'px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-950 text-amber-300 border border-amber-800';
       } else {
-        tag.className = 'px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-950 text-rose-300 border border-rose-800';
+        tag.className = 'px-2 py-0.5 rounded text-[11px] font-semibold bg-cyan-950 text-cyan-300 border border-cyan-800';
       }
     }
 
@@ -2307,12 +2307,12 @@ const AreaMap = {
   inspectSample(sampleId) {
     const s = this.samples.find(item => item.id === sampleId);
     if (!s) return;
-    const msg = `Sample ${s.id} in ${s.area} (${s.source}): TDS is ${s.tds} mg/L, pH is ${s.ph}, Turbidity is ${s.turb} NTU, and Hardness is ${s.hard} mg/L.`;
+    const msg = `Sample ${s.id} in ${s.area} (${s.source} at ${s.lat.toFixed(6)}°N, ${s.lon.toFixed(6)}°E): TDS is ${s.tds} mg/L, pH is ${s.ph}, Turbidity is ${s.turb} NTU, and Hardness is ${s.hard} mg/L.`;
     ProfessorAqua.setExplanation(msg, s.tds > 500 ? 'attention' : 'explaining', 'FIELD SAMPLE');
   },
 
   explainArea(a) {
-    const text = `In ${a.name} (${a.ward}), our dataset includes 10 certified sampling sites across Municipal Taps, Borewells, Wells, and Community Taps. Average TDS is ${a.tds.avg} mg/L, with a peak of ${a.tds.max} mg/L. ${a.obs} ${a.rec}`;
-    ProfessorAqua.setExplanation(text, a.color === 'rose' ? 'attention' : 'explaining', 'WARD PROFILE');
+    const text = `In ${a.name} (${a.ward} at ${a.lat.toFixed(6)}°N, ${a.lon.toFixed(6)}°E), our dataset includes 10 certified sampling sites. Average TDS is ${a.tds.avg} mg/L (min ${a.tds.min}, peak ${a.tds.max} mg/L). ${a.obs} ${a.rec}`;
+    ProfessorAqua.setExplanation(text, a.color === 'amber' ? 'attention' : 'explaining', 'WARD PROFILE');
   }
 };
