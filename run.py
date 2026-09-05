@@ -32,15 +32,19 @@ def main():
 
     try:
         import uvicorn
-        # Open browser in a separate thread or call
         import threading
         import time
-        def open_browser():
-            time.sleep(1.5)
-            webbrowser.open(url)
-        threading.Thread(target=open_browser, daemon=True).start()
 
-        uvicorn.run("backend.app.main:app", host="127.0.0.1", port=port, reload=True)
+        is_cloud = bool(os.environ.get("PORT") or os.environ.get("RENDER"))
+        host = "0.0.0.0" if is_cloud else "127.0.0.1"
+
+        if not is_cloud:
+            def open_browser():
+                time.sleep(1.5)
+                webbrowser.open(url)
+            threading.Thread(target=open_browser, daemon=True).start()
+
+        uvicorn.run("backend.app.main:app", host=host, port=port, reload=not is_cloud)
     except KeyboardInterrupt:
         print("\nJalCheck server stopped.")
 
